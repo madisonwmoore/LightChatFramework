@@ -1,0 +1,2 @@
+# LightChatFramework
+Lightweight Chat Framework
