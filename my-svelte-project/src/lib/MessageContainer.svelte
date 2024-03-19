@@ -1,24 +1,47 @@
 <script>
-import {afterUpdate, beforeUpdate, onDestroy, onMount} from 'svelte';
-alert("Once")
-let val=0;
-function reRender(){
-   val=Date.now() 
-}
-afterUpdate(()=>{alert("Twice")})
+  import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
+  import { messageStore, postMessage as pm } from "./Stores/MessageStore.js";
+  import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
+  import { fly, fade, slide } from 'svelte/transition';
+  let val = 0;
+
+  function postMessage() {
+    pm(`${Math.random()} Moo`)
+  }
+
+  function reRender() {
+    val = Date.now();
+  }
+  afterUpdate(() => {
+    console.log("Rerender");
+    // alert("Twice");
+  });
+
+  let messageList = [];
+
+  const unsubscribe = messageStore.subscribe((val) => {
+    messageList = val;
+  });
 </script>
 
 <div class="messageContainer">
-<p>{val}</p>
-<button on:click={()=>reRender()}>Rerender</button>
+  {#each messageList as val}
+
+  <TextMessage variant="sent" message={val}/>
+
+  {/each}
 </div>
 
 <style>
   .messageContainer {
+    display:flex;
+    flex-direction:column;
+    justify-content: end;
     background-color: white;
     width: 100%;
     min-height: 50%;
     flex-grow: 1;
     overflow-y: scroll;
+    overflow-x:hidden;
   }
 </style>
