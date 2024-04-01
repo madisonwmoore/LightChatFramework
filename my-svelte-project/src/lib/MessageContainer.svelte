@@ -3,10 +3,11 @@
   import { messageStore, postMessage as pm } from "./Stores/MessageStore.js";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
   import { fly, fade, slide } from 'svelte/transition';
+  import { connector } from "./Stores/ConnectionStore";
   let val = 0;
 
   function postMessage() {
-    
+
     pm(`${Math.random()} Moo`)
   }
 
