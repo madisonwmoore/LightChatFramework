@@ -1,10 +1,13 @@
 <script>
   import { messageStore, postMessage as pm } from "../Stores/MessageStore.js";
   import autosize from "svelte-autosize";
+  import {connector}  from "../Stores/ConnectionStore.js";
+
   let message;
   function sendMessage() {
-    pm(message);
+    $connector.sendTextMessage(message)
     message = "";
+    
   }
 
   function handleKeyDown(e) {

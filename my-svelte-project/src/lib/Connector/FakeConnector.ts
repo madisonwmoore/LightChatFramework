@@ -1,27 +1,34 @@
-
+import { writable } from "svelte/store";
+import { messageStore, postMessage } from "../Stores/MessageStore";
 
 class FakeConnector {
+  messageCallbacks;
   constructor() {
-    alert('Constructed')
+    console.log("Constructor");
   }
 
   async start() {
-    alert("Started")
+    console.log("Connection Started");
+    // alert("Started")
   }
 
   onMessage(callback: () => any) {
-    callback();
+    messageStore.subscribe(callback);
   }
 
-  sendTextMessage = () => {
+  sendTextMessage = (message: string) => {
     console.log("Sending Message");
+    postMessage(message);
   };
 
-  getTranscript = () => {};
+  getTranscript = () => {
+    return;
+  };
 
-  disconnect=()=>{
-    alert('Disconnecting')
-  }
+  disconnect = () => {
+    console.log("Disconnecting");
+    //alert('Disconnecting')
+  };
 }
 
 export default FakeConnector;
