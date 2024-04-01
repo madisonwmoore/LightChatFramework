@@ -9,7 +9,6 @@ class FakeConnector {
 
   async start() {
     console.log("Connection Started");
-    // alert("Started")
   }
 
   onMessage(callback: () => any) {
@@ -19,7 +18,12 @@ class FakeConnector {
   sendTextMessage = (message: string) => {
     console.log("Sending Message");
     postMessage(message);
+    this.handleIncomingMessage(message);
   };
+
+  private handleIncomingMessage=(message)=>{
+    postMessage('You said:"'+message+'"')
+  }
 
   getTranscript = () => {
     return;

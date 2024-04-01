@@ -20,7 +20,8 @@
 
   function widgetOpened(node) {
     $connector.onMessage((message) => {
-      postMessage(message);
+      
+     // postMessage(message);
     });
 
     $connector.start();
@@ -63,4 +64,15 @@
     -moz-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
   }
+
+  @media screen and (max-width: 600px) {
+  .chatframe {
+    display: fixed;
+    width: 100%;
+    height:100%;
+    top:0px;
+    right: 0px;
+    bottom:0px;
+  }
+}
 </style>
