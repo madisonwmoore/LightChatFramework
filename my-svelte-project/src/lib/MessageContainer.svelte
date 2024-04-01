@@ -6,6 +6,7 @@
   let val = 0;
 
   function postMessage() {
+    
     pm(`${Math.random()} Moo`)
   }
 

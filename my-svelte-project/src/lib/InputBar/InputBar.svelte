@@ -1,37 +1,45 @@
 <script>
-import { messageStore, postMessage as pm } from "../Stores/MessageStore.js";
-import autosize from 'svelte-autosize';
-let message;
-function sendMessage(){
-pm(message)
-message=''
-}
+  import { messageStore, postMessage as pm } from "../Stores/MessageStore.js";
+  import autosize from "svelte-autosize";
+  let message;
+  function sendMessage() {
+    pm(message);
+    message = "";
+  }
 
-function handleKeyDown(e){
-if(e.code==='Enter'){
-    sendMessage()
-}
-}
+  function handleKeyDown(e) {
+    if (e.code === "Enter") {
+      e.preventDefault();
 
+      if (message.length > 0) {
+        sendMessage();
+      }
+    }
+  }
 </script>
 
 <div class="inputBar">
-<textarea on:keydown={handleKeyDown} bind:value={message} rows="1" use:autosize class="inputText" placeholder="Send a Message"/>
-<button on:click={()=>sendMessage()} class="sendButton">
-    >
-</button>
+  <textarea
+    on:keydown={handleKeyDown}
+    bind:value={message}
+    rows="1"
+    use:autosize
+    class="inputText"
+    placeholder="Send a Message"
+  />
+  <button on:click={() => sendMessage()} class="sendButton"> > </button>
 </div>
 
 <style>
-.inputBar{
+  .inputBar {
     display: flex;
     flex-direction: row;
     background-color: white;
     border-top: 0.5px solid grey;
     min-height: 40px;
-}
+  }
 
-.inputText{
+  .inputText {
     margin-left: 15px;
     border: none;
     resize: none;
@@ -40,24 +48,34 @@ if(e.code==='Enter'){
     line-height: 1;
     font-size: smaller;
     padding: 2px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+  }
 
-.inputText:focus{
+  .inputText:focus {
     outline: none;
-}
+  }
 
-.sendButton{
-    border:none;
+  .sendButton {
+    border: none;
     background-color: transparent;
     border-radius: 50%;
-    height:35px;
+    height: 35px;
     width: 35px;
     overflow: hidden;
-}
+  }
 
-.sendButton:hover{
-background-color: gray;
-}
-
+  .sendButton:hover {
+    background-color: gray;
+  }
 </style>

@@ -1,7 +1,13 @@
-class FakeConnector {
-  constructor() {}
 
-  async start() {}
+
+class FakeConnector {
+  constructor() {
+    alert('Constructed')
+  }
+
+  async start() {
+    alert("Started")
+  }
 
   onMessage(callback: () => any) {
     callback();
@@ -12,6 +18,10 @@ class FakeConnector {
   };
 
   getTranscript = () => {};
+
+  disconnect=()=>{
+    alert('Disconnecting')
+  }
 }
 
 export default FakeConnector;

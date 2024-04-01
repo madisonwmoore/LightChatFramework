@@ -1,21 +1,49 @@
+<svelte:options customElement="chat-widget" />
+
 <script>
-  import { fly } from 'svelte/transition';
+  import { fly } from "svelte/transition";
   import MessageContainer from "./MessageContainer.svelte";
   import Header from "./Header.svelte";
   import LaunchButton from "./LaunchButton/LaunchButton.svelte";
   import InputBar from "./InputBar/InputBar.svelte";
   export let isVisible = false;
-  import { quintOut, quadIn } from 'svelte/easing';
+  import { quintOut, quadIn } from "svelte/easing";
+  import { connector } from "./Stores/ConnectionStore";
+  import { onMount } from "svelte";
+  import { postMessage } from "./Stores/MessageStore";
+
+  onMount(() => {
+    {
+      $connector.start();
+    }
+  });
+
+  function widgetOpened(node) {
+    $connector.onMessage((message) => {
+      postMessage(message);
+    });
+
+    $connector.start();
+
+    return {
+      destroy: () => {},
+    };
+  }
 </script>
-<svelte:options customElement="chat-widget"/>
+
 <div>
   {#if isVisible}
-    <div out:fly={{y:100, easing:quadIn}} in:fly={{y:100, easing:quintOut}} class="chatframe">
+    <div
+      use:widgetOpened
+      out:fly={{ y: 100, easing: quadIn }}
+      in:fly={{ y: 100, easing: quintOut }}
+      class="chatframe"
+    >
       <Header><p>Moo</p></Header>
       <MessageContainer />
       <InputBar />
     </div>{/if}
-  <LaunchButton on:click={()=>isVisible=!isVisible}/>
+  <LaunchButton on:click={() => (isVisible = !isVisible)} />
 </div>
 
 <style>
