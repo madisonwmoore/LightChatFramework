@@ -1,6 +1,6 @@
 <svelte:options customElement="chat-widget" />
 
-<script>
+<script lang="ts">
   import { fly } from "svelte/transition";
   import MessageContainer from "./MessageContainer.svelte";
   import Header from "./Header.svelte";
@@ -10,7 +10,7 @@
   import { quintOut, quadIn } from "svelte/easing";
   import { connector } from "./Stores/ConnectionStore";
   import { onMount } from "svelte";
-  import { postMessage } from "./Stores/MessageStore";
+  import { postMessage, type Message } from "./Stores/MessageStore";
 
   onMount(() => {
     {
@@ -19,9 +19,8 @@
   });
 
   function widgetOpened(node) {
-    $connector.onMessage((message) => {
-      
-     // postMessage(message);
+    $connector.onMessage((message: Message) => {
+      postMessage(message);
     });
 
     $connector.start();
@@ -66,13 +65,13 @@
   }
 
   @media screen and (max-width: 600px) {
-  .chatframe {
-    display: fixed;
-    width: 100%;
-    height:100%;
-    top:0px;
-    right: 0px;
-    bottom:0px;
+    .chatframe {
+      display: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+    }
   }
-}
 </style>

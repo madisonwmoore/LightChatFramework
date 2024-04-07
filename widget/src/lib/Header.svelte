@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { IconX, IconMinus } from "@tabler/icons-svelte";
 </script>
 

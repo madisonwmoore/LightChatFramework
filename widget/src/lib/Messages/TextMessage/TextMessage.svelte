@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   export let message;
   export let variant = "sent";
   import { fade, slide } from "svelte/transition";
 </script>
 
 <div class="textMessage">
-  <div transition:slide={{ y: 100 }} class={`messageBubble ${variant}`}>
+  <div class={`messageBubble ${variant}`}>
+  <!-- <div transition:slide={{ y: 100 }} class={`messageBubble ${variant}`}> -->
     <p>{message}</p>
   </div>
 </div>

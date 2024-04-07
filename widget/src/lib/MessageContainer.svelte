@@ -1,14 +1,13 @@
-<script>
+<script lang="ts">
   import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
-  import { messageStore, postMessage as pm } from "./Stores/MessageStore.js";
+  import { messageStore, postMessage as pm } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
-  import { fly, fade, slide } from 'svelte/transition';
+  import { fly, fade, slide } from "svelte/transition";
   import { connector } from "./Stores/ConnectionStore";
   let val = 0;
 
   function postMessage() {
-
-    pm(`${Math.random()} Moo`)
+   // pm(`${Math.random()} Moo`);
   }
 
   function reRender() {
@@ -28,22 +27,20 @@
 
 <div class="messageContainer">
   {#each messageList as val}
-
-  <TextMessage variant="sent" message={val}/>
-
+    <TextMessage variant="sent" message={val} />
   {/each}
 </div>
 
 <style>
   .messageContainer {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     justify-content: end;
     background-color: white;
     width: 100%;
     min-height: 50%;
     flex-grow: 1;
     overflow-y: scroll;
-    overflow-x:hidden;
+    overflow-x: hidden;
   }
 </style>
