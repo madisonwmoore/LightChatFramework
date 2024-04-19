@@ -1,17 +1,16 @@
-import { writable } from "svelte/store";
 import {
-  messageStore,
   postMessage,
   type Message,
   type TextMessage,
 } from "../Stores/MessageStore";
-import { registerServiceWorker } from "../ServiceWorker/serviceworker";
+import { v4 as uuidv4 } from "uuid";
+import EventBus from "./EventBus";
 
 class FakeConnector {
-  // messageCallbacks:any[];
+  events: EventBus;
   constructor() {
     console.log("Constructor");
-    registerServiceWorker();
+    this.events = new EventBus();
   }
 
   async start() {
@@ -19,10 +18,10 @@ class FakeConnector {
   }
 
   onMessage(callback: (message: Message) => any) {
-    messageStore.subscribe((value: Message[]) => callback(value[value.length]));
+    this.events.sub("message", callback);
   }
 
-  sendTextMessage = (message: string) => {
+  public sendTextMessage = (message: string) => {
     // navigator.serviceWorker.ready.then((registration) => {
     //   registration.active.postMessage(
     //     "Test message sent immediately after creation"
@@ -31,6 +30,7 @@ class FakeConnector {
     console.log("Sending Message");
     const messageObject: Message = {
       id: "",
+      datetime: Date.now(),
       type: "TEXT",
     };
     postMessage(messageObject);
@@ -39,11 +39,15 @@ class FakeConnector {
 
   private handleIncomingMessage = (message: Message) => {
     const messageObject: Message | TextMessage = {
-      id: "3",
+      id: uuidv4(),
       type: "TEXT",
+      datetime: Date.now(),
       content: (message as TextMessage)?.content,
     };
-    postMessage(messageObject);
+
+    this.events.pub("message", messageObject);
+    //postMessage(messageObject);
+    // this.dispatch("message", messageObject);
   };
 
   getTranscript = () => {

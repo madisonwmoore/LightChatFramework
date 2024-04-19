@@ -1,7 +1,9 @@
 <script lang="ts">
-  export let message;
+
+  export let message:string;
   export let variant = "sent";
-  import { fade, slide } from "svelte/transition";
+  //import { fade, slide } from "svelte/transition";
+  // import {type TextMessage} from "../../Stores/MessageStore.ts"
 </script>
 
 <div class="textMessage">

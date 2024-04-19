@@ -1,5 +1,10 @@
 <script lang="ts">
   import { IconX, IconMinus } from "@tabler/icons-svelte";
+  import { messageStore } from "./Stores/MessageStore";
+
+  messageStore.subscribe((m)=>{
+    console.log("Moo")
+  })
 </script>
 
 <div class="header">

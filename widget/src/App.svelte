@@ -1,7 +1,7 @@
 <script>
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+
   import ChatFrame from './lib/ChatFrame.svelte'
 </script>
 
@@ -17,7 +17,7 @@
   <h1>Vite + Svelte</h1>
 
   <div class="card">
-    <Counter />
+    <!-- <Counter /> -->
   </div>
 <chat-widget/>
 

@@ -1,34 +1,40 @@
 <script lang="ts">
-  import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
-  import { messageStore, postMessage as pm } from "./Stores/MessageStore";
-  import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
-  import { fly, fade, slide } from "svelte/transition";
-  import { connector } from "./Stores/ConnectionStore";
-  let val = 0;
+  import { afterUpdate } from "svelte";
+  import { type Message, messageStore, postMessage as pm, updateMessage as um, type TextMessage as tm } from "./Stores/MessageStore";
+  import TextMessage  from "./Messages/TextMessage/TextMessage.svelte";
+  // import {VirtualList} from '@sveltejs/svelte-virtual-list';
+  // import { fly, fade, slide } from "svelte/transition";
+  // import { connector } from "./Stores/ConnectionStore";
+  //let val = 0;
 
-  function postMessage() {
-   // pm(`${Math.random()} Moo`);
-  }
+  // function postMessage() {
+  //  // pm(`${Math.random()} Moo`);
+  // }
 
-  function reRender() {
-    val = Date.now();
-  }
+  // function reRender() {
+  //   val = Date.now();
+  // }
   afterUpdate(() => {
     console.log("Rerender");
     // alert("Twice");
   });
 
-  let messageList = [];
+  let messageList:Message[] = [];
 
-  const unsubscribe = messageStore.subscribe((val) => {
+ messageStore.subscribe((val) => {
     messageList = val;
   });
 </script>
 
 <div class="messageContainer">
+  <button on:click={()=>um('2',null)}></button>
+  <!-- <VirtualList> -->
   {#each messageList as val}
-    <TextMessage variant="sent" message={val} />
+  {#if val.type==="TEXT"}
+    <TextMessage variant="sent" message={val.content.message} />
+  {/if}
   {/each}
+  <!-- </VirtualList> -->
 </div>
 
 <style>
