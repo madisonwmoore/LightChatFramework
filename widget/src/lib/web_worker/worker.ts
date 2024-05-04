@@ -1,4 +1,4 @@
-import FakeConnector from "./";
+import FakeConnector from "../Connector/FakeConnector";
 
 self.connections = [];
 self.connector;

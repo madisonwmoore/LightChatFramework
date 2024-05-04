@@ -10,7 +10,7 @@ class Connector {
       console.log("Creating Connector");
       if (window.SharedWorker) {
         this.worker = new SharedWorker(
-          new URL("./worker.ts", import.meta.url),
+          new URL("../web_worker/worker.ts", import.meta.url),
           { type: "module" }
         );
         this.worker.port.start();
