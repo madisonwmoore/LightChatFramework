@@ -3,16 +3,25 @@ import FakeConnector from "../Connector/FakeConnector";
 self.connections = [];
 self.connector;
 
+/**
+ * When connecting to a web worker
+ */
 onconnect = (e) => {
-  const port = e.ports[0];
+  const port: MessagePort = e.ports[0];
 
-  self.connector = new FakeConnector();
+  if (self.connections.length < 1) {
+    self.connector = new FakeConnector();
+  }
+
+  self.connections.push(port);
 
   port.addEventListener("message", (e) => {
     console.log(e);
     const workerResult = `Result: ${e.data[0] * e.data[1]}`;
-    port.postMessage(workerResult);
+    self.connections.forEach((port: MessagePort) => {
+      port.postMessage(e.data.payload);
+    });
   });
 
-  port.start(); // Required when using addEventListener. Otherwise called implicitly by onmessage setter.
+  port.start();
 };

@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        //this config for target "es5"
+        "lib": ["WebWorker", "es2020", "scripthost"]
+        
+    },
+    "include": ["./worker.ts"]
+}

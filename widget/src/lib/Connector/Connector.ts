@@ -1,5 +1,13 @@
 import FakeConnector from "./FakeConnector";
 import EventBus from "./EventBus";
+import { Message, TextMessage } from "../Stores/MessageStore";
+import {
+  type Message,
+  messageStore,
+  postMessage as pm,
+  updateMessage as um,
+  type TextMessage as tm,
+} from "../Stores/MessageStore";
 
 class Connector {
   worker: SharedWorker | undefined = undefined;
@@ -15,7 +23,15 @@ class Connector {
         );
         this.worker.port.start();
         this.worker.port.onmessage = (ev: MessageEvent) => {
-          console.log(ev);
+          console.log(ev)
+          const messageObject: Message | TextMessage = {
+            id: Math.random(),
+            type: "TEXT",
+            datetime: Date.now(),
+            content: { message: "You said " + ev.data },
+          };
+          pm(messageObject);
+          
         };
         this.worker.onerror = () => {
           console.error("Webworker Reported Error");
@@ -46,14 +62,21 @@ class Connector {
 
   onMessage = (callback: any) => {
     if (this.worker) {
+      // this.worker.port.addEventListener('message',(e:MessageEvent)=>{
+      //   console.log(e)
+      //   const messageObject: Message | TextMessage = {
+      //     id: Math.random(),
+      //     type: "TEXT",
+      //     datetime: Date.now(),
+      //     content: { message: "You said " + (e.data.payload) },
+      //   };
+      //   callback(messageObject)})
     } else {
       this.fallback?.onMessage(callback);
     }
   };
 
-  onConnected = (callback: any) => {
-
-  };
+  onConnected = (callback: any) => {};
 
   /**
    *
