@@ -1,5 +1,4 @@
 <script lang="ts">
-
   export let message:string;
   export let variant = "sent";
   //import { fade, slide } from "svelte/transition";

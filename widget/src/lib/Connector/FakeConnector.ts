@@ -6,11 +6,15 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
 
+
 class FakeConnector {
   events: EventBus;
   constructor() {
     console.log("Constructor");
     this.events = new EventBus();
+ 
+    // this.worker=new SharedWorker();
+    // this.worker.port.postMessage('Moo');
   }
 
   async start() {
@@ -22,16 +26,15 @@ class FakeConnector {
   }
 
   public sendTextMessage = (message: string) => {
-    // navigator.serviceWorker.ready.then((registration) => {
-    //   registration.active.postMessage(
-    //     "Test message sent immediately after creation"
-    //   );
-    // });
     console.log("Sending Message");
-    const messageObject: Message = {
+    const messageObject: TextMessage = {
       id: "",
       datetime: Date.now(),
       type: "TEXT",
+      content: {
+        contentType: "text",
+        message,
+      },
     };
     postMessage(messageObject);
     this.handleIncomingMessage(message);
@@ -42,12 +45,10 @@ class FakeConnector {
       id: uuidv4(),
       type: "TEXT",
       datetime: Date.now(),
-      content: (message as TextMessage)?.content,
+      content: { message: "You said " + (message as TextMessage)?.content },
     };
 
     this.events.pub("message", messageObject);
-    //postMessage(messageObject);
-    // this.dispatch("message", messageObject);
   };
 
   getTranscript = () => {

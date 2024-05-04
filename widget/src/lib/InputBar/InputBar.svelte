@@ -1,7 +1,7 @@
 <script>
  // import { messageStore, postMessage as pm } from "../Stores/MessageStore.ts";
   import autosize from "svelte-autosize";
-  import {connector}  from "../Stores/ConnectionStore.js";
+  import {connector}  from "../Stores/ConnectionStore";
 
   let message;
   function sendMessage() {

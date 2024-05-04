@@ -2,7 +2,6 @@ class EventBus{
     eventSubscribers:{[key:string]:any};
     constructor(){
         this.eventSubscribers={};
-
     }
 
     pub=(eventname:string, eventPayload:any)=>{
@@ -12,11 +11,14 @@ class EventBus{
     }
 
     sub=(eventname:string, callback:any)=>{
-        if(this.eventSubscribers[eventname].subscribers){
+        console.log(this.eventSubscribers)
+        if(this.eventSubscribers[eventname]?.subscribers){
             this.eventSubscribers[eventname].subscribers.push(callback);
         }
         else{
-            this.eventSubscribers[eventname].subscribers=[callback]
+            this.eventSubscribers[eventname]={}
+            this.eventSubscribers[eventname]["subscribers"]=new Array(1);
+            this.eventSubscribers[eventname].subscribers.push(callback);
         }
     }
 

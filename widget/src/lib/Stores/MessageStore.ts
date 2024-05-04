@@ -9,7 +9,6 @@ export interface Message {
 }
 
 let messages: Message[] = [];
-alert("Message Store"+Date.now());
 export const messageStore = writable(messages);
 
 

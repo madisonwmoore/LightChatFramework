@@ -27,9 +27,10 @@
 </script>
 
 <div class="messageContainer">
-  <button on:click={()=>um('2',null)}></button>
+
   <!-- <VirtualList> -->
   {#each messageList as val}
+  {console.log(val)}
   {#if val.type==="TEXT"}
     <TextMessage variant="sent" message={val.content.message} />
   {/if}
@@ -40,11 +41,12 @@
 <style>
   .messageContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: end;
     background-color: white;
     width: 100%;
     min-height: 50%;
+    /* height:400px; */
     flex-grow: 1;
     overflow-y: scroll;
     overflow-x: hidden;

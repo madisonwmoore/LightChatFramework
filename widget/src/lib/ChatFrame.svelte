@@ -8,22 +8,25 @@
   import InputBar from "./InputBar/InputBar.svelte";
   export let isVisible = false;
   import { quintOut, quadIn } from "svelte/easing";
+  import Connector from "./Connector/Connector";
   import { connector } from "./Stores/ConnectionStore";
   import { onMount } from "svelte";
-  import { postMessage, type Message } from "./Stores/MessageStore";
+  // import { postMessage, type Message } from "./Stores/MessageStore";
 
   onMount(() => {
     {
-      $connector.start();
+      
+       $connector=new Connector();
     }
   });
 
   function widgetOpened(node) {
-    $connector.onMessage((message: Message) => {
-      postMessage(message);
-    });
 
-    $connector.start();
+    // $connector.onMessage((message: Message) => {
+    //   postMessage(message);
+    // });
+
+    // $connector.start();
 
     return {
       destroy: () => {},
