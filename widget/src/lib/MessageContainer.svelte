@@ -8,7 +8,8 @@
     type TextMessage as tm,
   } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
-  import { fade, slide } from "svelte/transition";
+  import { fly } from "svelte/transition";
+
 
   let scrollContainer;
 
@@ -42,14 +43,15 @@
 </script>
 
 <div class="container" bind:this={scrollContainer}>
-  <div class="messageContainer"  role="alert">
-    {#each messageList as val}
+  <div class="messageContainer"  role="log" aria-live="assertive">
+    {#each messageList as val (val.id)}
+    {console.log(val)}
+    <div transition:fly>
       {#if val.type === "TEXT"}
-      
-        <TextMessage variant={val.variant} message={val.content.message} />
-      
-      
-      {/if}
+        
+        <TextMessage variant={val.variant} message={val.content} />
+      {/if}   
+    </div>
     {/each}
   </div>
 </div>

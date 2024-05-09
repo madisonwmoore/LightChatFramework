@@ -18,13 +18,14 @@ class Connector {
         this.worker.port.start();
         this.worker.port.onmessage = (ev: MessageEvent) => {
           console.log(ev);
-          const messageObject: Message | TextMessage = {
-            id: Math.random(),
-            type: "TEXT",
-            datetime: Date.now(),
-            content: { message: "You said " + ev.data },
-          };
-          pm(messageObject);
+          // const messageObject: Message | TextMessage = {
+          //   id: Math.random(),
+          //   type: "TEXT",
+          //   datetime: Date.now(),
+          //   variant:ev.data.variant,
+          //   content: { message: ev.data.content },
+          // };
+          pm(ev.data);
         };
         this.worker.onerror = () => {
           console.error("Webworker Reported Error");

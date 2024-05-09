@@ -66,7 +66,7 @@
     flex-grow: 1;
     resize: none;
     line-height: 1.1rem;
-    font-size: smaller;
+    font-size: small;
     padding: 12px 2px;
     font-family:
       system-ui,

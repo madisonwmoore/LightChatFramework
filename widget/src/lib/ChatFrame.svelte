@@ -54,8 +54,8 @@
     flex-direction: column;
     overflow: hidden;
     z-index: 5000;
-    height: 500px;
-    width: 400px;
+    height: 660px;
+    width: 500px;
     position: fixed;
     bottom: 50px;
     right: 20px;

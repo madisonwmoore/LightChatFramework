@@ -1,6 +1,6 @@
 <script lang="ts">
   export let message:string;
-  export let variant = "sent";
+  export let variant;
   // import { fade, slide } from "svelte/transition";
   // import {type TextMessage} from "../../Stores/MessageStore.ts"
 </script>
@@ -44,14 +44,14 @@
     margin-bottom: 2px;
     margin-right:inherit;
     /* margin: 5px 10px; */
-    font-size: small;
+    font-size: medium;
   }
 
-  .sent {
+  .outgoing {
     float: right;
   }
 
-  .received {
+  .incoming {
     float: left;
   }
 

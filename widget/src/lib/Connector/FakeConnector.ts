@@ -18,9 +18,11 @@ class FakeConnector {
 
   async start() {
     console.log("Connection Started");
+    
   }
 
   onMessage(callback: (message: Message) => any) {
+    
     this.events.sub("message", callback);
   }
 
