@@ -8,6 +8,7 @@
     type TextMessage as tm,
   } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
+  import { fade, slide } from "svelte/transition";
 
   let scrollContainer;
 
@@ -41,10 +42,13 @@
 </script>
 
 <div class="container" bind:this={scrollContainer}>
-  <div class="messageContainer" >
+  <div class="messageContainer"  role="alert">
     {#each messageList as val}
       {#if val.type === "TEXT"}
-        <TextMessage variant="sent" message={val.content.message} />
+      
+        <TextMessage variant={val.variant} message={val.content.message} />
+      
+      
       {/if}
     {/each}
   </div>
@@ -67,9 +71,7 @@
     background-color: white;
     width: 100%;
     min-height: 100%;
-    /* height: 100%; */
+    padding-bottom: 10px;
     flex-grow: 1;
-    /* overflow-y: scroll;
-    overflow-x: hidden; */
   }
 </style>

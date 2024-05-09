@@ -1,14 +1,13 @@
 <script>
- // import { messageStore, postMessage as pm } from "../Stores/MessageStore.ts";
+  // import { messageStore, postMessage as pm } from "../Stores/MessageStore.ts";
   import autosize from "svelte-autosize";
-  import {connector}  from "../Stores/ConnectionStore";
+  import { connector } from "../Stores/ConnectionStore";
 
   let message;
   function sendMessage() {
-    $connector.sendTextMessage(message)
+    $connector.sendTextMessage(message);
     message = "";
     reset();
-    
   }
 
   function handleKeyDown(e) {
@@ -22,24 +21,24 @@
   }
 
   async function reset() {
-  value = '';
-  await tick();
-  autosize.update(textarea);
-}
+    value = "";
+    await tick();
+    autosize.update(textarea);
+  }
 </script>
 
 <div class="inputBar">
   <div class="wrapper">
-  <textarea
-    on:keydown={handleKeyDown}
-    bind:value={message}
-    rows="1"
-    use:autosize
-    class="inputText"
-    placeholder="Send a Message"
-  />
-  <button on:click={() => sendMessage()} class="sendButton"> > </button>
-</div>
+    <textarea
+      on:keydown={handleKeyDown}
+      bind:value={message}
+      rows="1"
+      use:autosize
+      class="inputText"
+      placeholder="Send a Message"
+    />
+    <button on:click={() => sendMessage()} class="sendButton"> > </button>
+  </div>
 </div>
 
 <style>
@@ -52,7 +51,7 @@
     height: auto;
   }
 
-  .wrapper{
+  .wrapper {
     /* display: flex; */
     display: flex;
     flex-direction: row;

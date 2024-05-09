@@ -30,21 +30,24 @@ class FakeConnector {
       id: uuidv4(),
       datetime: Date.now(),
       type: "TEXT",
+      variant:'outgoing',
       content: {
         contentType: "text",
         message,
       },
     };
     postMessage(messageObject);
-    this.handleIncomingMessage(messageObject);
+   // this.events.pub("message", messageObject);
+    // this.handleIncomingMessage(messageObject);
   };
 
   private handleIncomingMessage = (message: Message) => {
     const messageObject: Message | TextMessage = {
       id: uuidv4(),
       type: "TEXT",
+      variant:'incoming',
       datetime: Date.now(),
-      content: { message: "You said " + (message as TextMessage)?.content },
+      content: { message: "You said: " + (message as TextMessage)?.content },
     };
     this.events.pub("message", messageObject);
   };

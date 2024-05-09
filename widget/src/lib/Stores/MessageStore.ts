@@ -6,11 +6,11 @@ export interface Message {
   datetime: number;
   type: MessageType;
   status?: string;
+  variant?: "incoming" | "outgoing";
 }
 
 let messages: Message[] = [];
 export const messageStore = writable(messages);
-
 
 messageStore.subscribe((val) => {
   messages = val;
