@@ -7,6 +7,7 @@
   function sendMessage() {
     $connector.sendTextMessage(message)
     message = "";
+    reset();
     
   }
 
@@ -19,9 +20,16 @@
       }
     }
   }
+
+  async function reset() {
+  value = '';
+  await tick();
+  autosize.update(textarea);
+}
 </script>
 
 <div class="inputBar">
+  <div class="wrapper">
   <textarea
     on:keydown={handleKeyDown}
     bind:value={message}
@@ -32,14 +40,24 @@
   />
   <button on:click={() => sendMessage()} class="sendButton"> > </button>
 </div>
+</div>
 
 <style>
   .inputBar {
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     background-color: white;
     border-top: 0.5px solid grey;
     min-height: 40px;
+    height: auto;
+  }
+
+  .wrapper{
+    /* display: flex; */
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    /* height: 40px; */
   }
 
   .inputText {
@@ -48,9 +66,9 @@
     resize: none;
     flex-grow: 1;
     resize: none;
-    line-height: 1;
+    line-height: 1.1rem;
     font-size: smaller;
-    padding: 2px;
+    padding: 12px 2px;
     font-family:
       system-ui,
       -apple-system,

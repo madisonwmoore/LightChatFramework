@@ -15,7 +15,6 @@
 
   onMount(() => {
     {
-      
        $connector=new Connector();
     }
   });

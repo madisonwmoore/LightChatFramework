@@ -3,6 +3,8 @@ import FakeConnector from "../Connector/FakeConnector";
 self.connections = [];
 self.connector;
 
+const handleMessages = () => {};
+
 /**
  * When connecting to a web worker
  */

@@ -7,7 +7,6 @@
 
 <div class="textMessage">
   <div class={`messageBubble ${variant}`}>
-  <!-- <div transition:slide={{ y: 100 }} class={`messageBubble ${variant}`}> -->
     <p>{message}</p>
   </div>
 </div>

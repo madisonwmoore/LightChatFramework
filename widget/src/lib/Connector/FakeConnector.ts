@@ -6,13 +6,12 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
 
-
 class FakeConnector {
   events: EventBus;
   constructor() {
     console.log("Constructor");
     this.events = new EventBus();
- 
+
     // this.worker=new SharedWorker();
     // this.worker.port.postMessage('Moo');
   }
@@ -28,7 +27,7 @@ class FakeConnector {
   public sendTextMessage = (message: string) => {
     console.log("Sending Message");
     const messageObject: TextMessage = {
-      id: "",
+      id: uuidv4(),
       datetime: Date.now(),
       type: "TEXT",
       content: {
@@ -37,7 +36,7 @@ class FakeConnector {
       },
     };
     postMessage(messageObject);
-    this.handleIncomingMessage(message);
+    this.handleIncomingMessage(messageObject);
   };
 
   private handleIncomingMessage = (message: Message) => {
@@ -47,17 +46,19 @@ class FakeConnector {
       datetime: Date.now(),
       content: { message: "You said " + (message as TextMessage)?.content },
     };
-
     this.events.pub("message", messageObject);
   };
 
+  /**
+   *
+   * @returns
+   */
   getTranscript = () => {
     return;
   };
 
   disconnect = () => {
     console.log("Disconnecting");
-    //alert('Disconnecting')
   };
 }
 
