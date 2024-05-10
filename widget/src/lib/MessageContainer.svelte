@@ -8,7 +8,8 @@
     type TextMessage as tm,
   } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
-  import { fly } from "svelte/transition";
+  import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
+  import { fade, scale, slide, fly } from "svelte/transition";
 
 
   let scrollContainer;
@@ -29,8 +30,14 @@
   afterUpdate(() => {
     console.log("Rerender");
     console.log(scrollContainer)
-
-    scrollContainer.scrollTo(0,scrollContainer.scrollHeight);
+    scrollContainer.scrollTo({top:scrollContainer.scrollHeight, behavior:'smooth'})
+    setTimeout(()=>{
+      // scrollContainer.scrollTo(0,scrollContainer.scrollHeight);
+      scrollContainer.scrollTo({top:scrollContainer.scrollHeight, behavior:'smooth'})
+    
+    
+   },500)
+    
     
     // alert("Twice");
   });
@@ -48,9 +55,11 @@
     {console.log(val)}
     <div transition:fly>
       {#if val.type === "TEXT"}
-        
         <TextMessage variant={val.variant} message={val.content} />
       {/if}   
+      {#if val.type === "CUSTOM"}
+      <HTMLMessage variant="incoming" content={val.content} />
+    {/if}   
     </div>
     {/each}
   </div>
@@ -58,12 +67,26 @@
 
 <style>
   .container {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
     width: 100%;
     background-color: white;
   }
+
+  ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: rgb(193, 193, 193);
+      height: 20px;
+    }
 
   .messageContainer {
     display: flex;

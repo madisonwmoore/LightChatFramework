@@ -13,20 +13,17 @@
   import { onMount } from "svelte";
   // import { postMessage, type Message } from "./Stores/MessageStore";
 
+  function yes(){
+    alert('Moo')
+  }
+
   onMount(() => {
     {
-       $connector=new Connector();
+      $connector = new Connector();
     }
   });
 
   function widgetOpened(node) {
-
-    // $connector.onMessage((message: Message) => {
-    //   postMessage(message);
-    // });
-
-    // $connector.start();
-
     return {
       destroy: () => {},
     };
@@ -54,6 +51,7 @@
     flex-direction: column;
     overflow: hidden;
     z-index: 5000;
+    max-height: 90%;
     height: 660px;
     width: 500px;
     position: fixed;
@@ -76,4 +74,8 @@
       bottom: 0px;
     }
   }
+
+  :global(.moo){
+  color:red;
+}
 </style>
