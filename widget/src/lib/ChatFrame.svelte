@@ -58,10 +58,17 @@
     bottom: 50px;
     right: 20px;
     border-radius: 10px;
-    background-color: gray;
+    /* background-color: gray; */
     -webkit-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
+
+    background: rgba( 255, 255, 255, 0.35 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 10px );
+-webkit-backdrop-filter: blur( 10px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
   }
 
   @media screen and (max-width: 600px) {

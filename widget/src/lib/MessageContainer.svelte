@@ -71,7 +71,8 @@
     overflow-x: hidden;
     height: 100%;
     width: 100%;
-    background-color: white;
+    /* background-color: white; */
+
   }
 
   ::-webkit-scrollbar {
@@ -93,10 +94,20 @@
     position: static;
     flex-direction: column;
     justify-content: end;
-    background-color: white;
+    /* background-color: white; */
     width: 100%;
     min-height: 100%;
     padding-bottom: 10px;
     flex-grow: 1;
+
+    background-color: transparent;
+
+    /* background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+
   }
 </style>
