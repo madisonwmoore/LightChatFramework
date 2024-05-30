@@ -61,18 +61,18 @@ onconnect = (e) => {
     </div>
     `;
 
-    setTimeout(()=>{
-      self.connections.forEach((port: MessagePort) => {
-        const response={
-          id: uuidv4(),
-          datetime: 0,
-          type: "CUSTOM",
-          variant:'incoming',
-          content,
-        };
-        port.postMessage(response);
-      });
-    },2000)
+    // setTimeout(()=>{
+    //   self.connections.forEach((port: MessagePort) => {
+    //     const response={
+    //       id: uuidv4(),
+    //       datetime: 0,
+    //       type: "CUSTOM",
+    //       variant:'incoming',
+    //       content,
+    //     };
+    //     port.postMessage(response);
+    //   });
+    // },2000)
 
 
   });

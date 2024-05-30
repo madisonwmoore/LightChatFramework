@@ -13,8 +13,8 @@
   import { onMount } from "svelte";
   // import { postMessage, type Message } from "./Stores/MessageStore";
 
-  function yes(){
-    alert('Moo')
+  function yes() {
+    alert("Moo");
   }
 
   onMount(() => {
@@ -51,24 +51,24 @@
     flex-direction: column;
     overflow: hidden;
     z-index: 5000;
-    max-height: 90%;
+    max-height: calc(100vh - 60px);
     height: 660px;
     width: 500px;
     position: fixed;
+    padding-bottom: 10px;
     bottom: 50px;
     right: 20px;
     border-radius: 10px;
-    /* background-color: gray; */
     -webkit-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
 
-    background: rgba( 255, 255, 255, 0.35 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 10px );
--webkit-backdrop-filter: blur( 10px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   @media screen and (max-width: 600px) {
@@ -82,7 +82,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     }
   }
 
-  :global(.moo){
-  color:red;
-}
+  :global(.moo) {
+    color: red;
+  }
 </style>
