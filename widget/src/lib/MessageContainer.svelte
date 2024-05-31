@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate, beforeUpdate } from "svelte";
+  import { afterUpdate, beforeUpdate, onMount } from "svelte";
   import {
     type Message,
     messageStore,
@@ -9,12 +9,29 @@
   } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
-  import { fade, scale, slide, fly } from "svelte/transition";
+  import { fade, scale, slide, fly, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
 
-  let scrollContainer;
+  let scrollContainer:HTMLDivElement;
 
+  export const [send, receive] = crossfade({
+	duration: (d) => Math.sqrt(d * 200),
+
+	fallback(node, params) {
+		const style = getComputedStyle(node);
+		const transform = style.transform === 'none' ? '' : style.transform;
+
+		return {
+			duration: 600,
+			easing: quintOut,
+			css: (t) => `
+				transform: ${transform} scale(${t});
+				opacity: ${t}
+			`
+		};
+	}
+});
 
   afterUpdate(() => {
     scrollContainer?.scrollTo(
@@ -31,19 +48,20 @@
 </script>
 
 <div class="container" bind:this={scrollContainer}>
-  <div>
+  <div class="flexBox"></div>
     <div class="messageContainer" role="log" aria-live="assertive">
       {#each messageList as val (val.id)}
-        <div transition:scale={{ duration: 250, easing: quintOut }}>
+        <div 	in:receive={{ key: val.id }}
+        out:send={{ key: val.id }} animate:flip={{ duration: 200 }}>
           {#if val.type === "TEXT"}
-            <TextMessage variant={val.variant} message={val.content} />
+            <TextMessage  variant={val.variant} message={val.content} />
           {/if}
           {#if val.type === "CUSTOM"}
             <HTMLMessage variant="incoming" content={val.content} />
           {/if}
         </div>
       {/each}
-    </div>
+    
   </div>
 </div>
 
@@ -52,7 +70,11 @@
     overflow: auto;
     height: 100%;
     width: 100%;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
+  }
+
+  .flexBox{
+    flex-grow:1;
   }
 
   ::-webkit-scrollbar {
@@ -73,7 +95,8 @@
     overflow-y: hidden;
     display: flex;
     position: relative;
-    bottom: -512px;
+    bottom: -412px;
+    padding-top:10px;
     /* bottom: 50px; */
     flex-direction: column;
     justify-content: end;

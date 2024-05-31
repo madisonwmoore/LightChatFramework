@@ -6,7 +6,7 @@
 </script>
 
 
-<div  class="textMessage">
+<div   class="textMessage">
   <p class="sender">You</p>
   <div class={`messageBubble ${variant}`}>
     <p>{message}</p>
