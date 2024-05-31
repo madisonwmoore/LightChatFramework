@@ -15,53 +15,12 @@
 
   let scrollContainer;
 
-  // import {VirtualList} from '@sveltejs/svelte-virtual-list';
-  //import { fly, fade, slide } from "svelte/transition";
-  // import { connector } from "./Stores/ConnectionStore";
-  //let val = 0;
-
-  // function postMessage() {
-  //  // pm(`${Math.random()} Moo`);
-  // }
-
-  // function reRender() {
-  //   val = Date.now();
-  // }
-
-  beforeUpdate(() => {
-    // scrollContainer?.scrollTo(
-    //   0,
-    //   scrollContainer?.scrollHeight - scrollContainer?.clientHeight
-    // );
-    // scrollContainer?.scrollTo(
-    //   0,
-    //   scrollContainer?.scrollHeight - scrollContainer?.clientHeight
-    // );
-    // scrollContainer?.scrollTo(
-    //   0,
-    //   scrollContainer?.scrollHeight - scrollContainer?.clientHeight
-    // );
-  });
 
   afterUpdate(() => {
-    console.log("Rerender");
-    console.log(scrollContainer);
     scrollContainer?.scrollTo(
       0,
       scrollContainer?.scrollHeight - scrollContainer?.clientHeight
     );
-    // scrollContainer?.scrollTo(
-    //   0,
-    //   scrollContainer?.scrollHeight
-    // );
-    // scrollContainer?.scrollTo(
-    //   0,
-    //   scrollContainer?.scrollHeight - scrollContainer?.clientHeight
-    // );
-    // scrollContainer.scrollTo(
-    //   0,
-    //   scrollContainer.scrollHeight - scrollContainer.clientHeight
-    // );
   });
 
   let messageList: Message[] = [];
@@ -73,32 +32,27 @@
 
 <div class="container" bind:this={scrollContainer}>
   <div>
-  <div class="messageContainer" role="log" aria-live="assertive">
-    {#each messageList as val (val.id)}
-      <div
-        transition:scale={{ duration: 250, easing: quintOut }}
-        
-      >
-        {#if val.type === "TEXT"}
-          <TextMessage variant={val.variant} message={val.content} />
-        {/if}
-        {#if val.type === "CUSTOM"}
-          <HTMLMessage variant="incoming" content={val.content} />
-        {/if}
-      </div>
-    {/each}
-  </div></div>
+    <div class="messageContainer" role="log" aria-live="assertive">
+      {#each messageList as val (val.id)}
+        <div transition:scale={{ duration: 250, easing: quintOut }}>
+          {#if val.type === "TEXT"}
+            <TextMessage variant={val.variant} message={val.content} />
+          {/if}
+          {#if val.type === "CUSTOM"}
+            <HTMLMessage variant="incoming" content={val.content} />
+          {/if}
+        </div>
+      {/each}
+    </div>
+  </div>
 </div>
 
 <style>
   .container {
-    /* overflow-y: auto;
-    overflow-x: hidden; */
+    overflow: auto;
     height: 100%;
     width: 100%;
     scroll-behavior: smooth;
-    
-    /* background-color: white; */
   }
 
   ::-webkit-scrollbar {
@@ -116,16 +70,17 @@
   }
 
   .messageContainer {
-    overflow-y: auto;
+    overflow-y: hidden;
     display: flex;
-    position: fixed;
-    bottom:50px;
+    position: relative;
+    bottom: -512px;
+    /* bottom: 50px; */
     flex-direction: column;
     justify-content: end;
     /* background-color: white; */
     width: 100%;
-    min-height: 100%;
-    padding-bottom: auto;
+    /* min-height: 100%; */
+    padding-bottom: 50px;
     flex-grow: 1;
     /* height: 100%; */
 
