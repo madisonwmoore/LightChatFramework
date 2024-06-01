@@ -13,25 +13,33 @@
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
 
-  let scrollContainer:HTMLDivElement;
+  let scrollContainer: HTMLDivElement;
 
   export const [send, receive] = crossfade({
-	duration: (d) => Math.sqrt(d * 200),
+    duration: (d) => Math.sqrt(d * 200),
 
-	fallback(node, params) {
-		const style = getComputedStyle(node);
-		const transform = style.transform === 'none' ? '' : style.transform;
+    fallback(node, params) {
+      const style = getComputedStyle(node);
+      const transform = style.transform === "none" ? "" : style.transform;
 
-		return {
-			duration: 600,
-			easing: quintOut,
-			css: (t) => `
+      return {
+        duration: 600,
+        easing: quintOut,
+        css: (t) => `
 				transform: ${transform} scale(${t});
 				opacity: ${t}
-			`
-		};
-	}
-});
+			`,
+      };
+    },
+  });
+
+  onMount(()=>{
+    scrollContainer?.scrollTo(
+     {top:scrollContainer?.scrollHeight || 0,
+      behavior:'instant'
+     }
+    );
+  })
 
   afterUpdate(() => {
     scrollContainer?.scrollTo(
@@ -49,32 +57,35 @@
 
 <div class="container" bind:this={scrollContainer}>
   <div class="flexBox"></div>
-    <div class="messageContainer" role="log" aria-live="assertive">
-      {#each messageList as val (val.id)}
-        <div 	in:receive={{ key: val.id }}
-        out:send={{ key: val.id }} animate:flip={{ duration: 200 }}>
-          {#if val.type === "TEXT"}
-            <TextMessage  variant={val.variant} message={val.content} />
-          {/if}
-          {#if val.type === "CUSTOM"}
-            <HTMLMessage variant="incoming" content={val.content} />
-          {/if}
-        </div>
-      {/each}
-    
+  <div class="messageContainer" role="log" aria-live="assertive">
+    {#each messageList as val (val.id)}
+      <div
+        in:receive={{ key: val.id }}
+        out:send={{ key: val.id }}
+        animate:flip={{ duration: 200 }}
+      >
+        {#if val.type === "TEXT"}
+          <TextMessage variant={val.variant} message={val.content} />
+        {/if}
+        {#if val.type === "CUSTOM"}
+          <HTMLMessage variant="incoming" content={val.content} />
+        {/if}
+      </div>
+    {/each}
   </div>
 </div>
 
 <style>
   .container {
     overflow: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
     height: 100%;
     width: 100%;
-    /* scroll-behavior: smooth; */
   }
 
-  .flexBox{
-    flex-grow:1;
+  .flexBox {
+    flex-grow: 1;
   }
 
   ::-webkit-scrollbar {
@@ -92,28 +103,17 @@
   }
 
   .messageContainer {
+    padding-left: 20px;
+    padding-right: 20px;
     overflow-y: hidden;
     display: flex;
     position: relative;
     bottom: -412px;
-    padding-top:10px;
-    /* bottom: 50px; */
+    padding-top: 10px;
     flex-direction: column;
     justify-content: end;
-    /* background-color: white; */
-    width: 100%;
-    /* min-height: 100%; */
     padding-bottom: 50px;
     flex-grow: 1;
-    /* height: 100%; */
-
     background-color: transparent;
-
-    /* background: rgba( 255, 255, 255, 0.25 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 4px );
--webkit-backdrop-filter: blur( 4px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 ); */
   }
 </style>

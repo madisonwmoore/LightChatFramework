@@ -2,6 +2,7 @@
   // import { messageStore, postMessage as pm } from "../Stores/MessageStore.ts";
   import autosize from "svelte-autosize";
   import { connector } from "../Stores/ConnectionStore";
+  import { SendHorizontal } from 'lucide-svelte';
 
   let message;
   function sendMessage() {
@@ -37,8 +38,9 @@
       class="inputText"
       placeholder="Send a Message"
     />
-    <button on:click={() => sendMessage()} class="sendButton"> > </button>
+    <button on:click={() => sendMessage()} class="sendButton"> <SendHorizontal color="gray"/> </button>
   </div>
+
 </div>
 
 <style>
@@ -46,7 +48,7 @@
     /* display: flex;
     flex-direction: row; */
     background-color: white;
-    border-top: 0.5px solid grey;
+    /* border-top: 0.5px solid grey; */
     min-height: 40px;
     height: auto;
   }
@@ -55,19 +57,26 @@
     /* display: flex; */
     display: flex;
     flex-direction: row;
+    align-items: center;
     background-color: white;
+    margin-bottom:25px;
+    padding:0px 10px;
     /* height: 40px; */
   }
 
   .inputText {
+    background-color: #f0f0f0;
+    border-radius: 15px;
     margin-left: 15px;
+    margin-right: 20px;
     border: none;
     resize: none;
     flex-grow: 1;
     resize: none;
+    color:rgb(31, 31, 31);
     line-height: 1.1rem;
-    font-size: small;
-    padding: 12px 2px;
+    font-size: medium;
+    padding: 12px 18px;
     font-family:
       system-ui,
       -apple-system,
@@ -93,9 +102,11 @@
     height: 35px;
     width: 35px;
     overflow: hidden;
+
   }
 
   .sendButton:hover {
-    background-color: gray;
+    background-color: rgb(228, 228, 228);
+    transition: background-color 0.5s;
   }
 </style>

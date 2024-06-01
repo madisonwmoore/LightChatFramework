@@ -38,7 +38,7 @@
       in:fly={{ y: 100, easing: quintOut }}
       class="chatframe"
     >
-      <Header><p>Moo</p></Header>
+      <Header><b>Chat with Us</b></Header>
       <MessageContainer />
       <InputBar />
     </div>{/if}
@@ -63,12 +63,12 @@
     -moz-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
 
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.75);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* border: 1px solid rgba(255, 255, 255, 0.18); */
   }
 
   @media screen and (max-width: 600px) {
