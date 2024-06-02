@@ -82,6 +82,8 @@
     scroll-behavior: smooth;
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .flexBox {
@@ -105,15 +107,16 @@
   .messageContainer {
     padding-left: 20px;
     padding-right: 20px;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     display: flex;
     position: relative;
-    bottom: -412px;
+    bottom: 0px;
     padding-top: 10px;
     flex-direction: column;
     justify-content: end;
     padding-bottom: 50px;
     flex-grow: 1;
+    /* flex-basis: 0; */
     background-color: transparent;
   }
 </style>
