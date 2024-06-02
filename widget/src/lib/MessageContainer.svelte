@@ -107,7 +107,6 @@
   .messageContainer {
     padding-left: 20px;
     padding-right: 20px;
-    /* overflow-y: hidden; */
     display: flex;
     position: relative;
     bottom: 0px;
@@ -116,7 +115,6 @@
     justify-content: end;
     padding-bottom: 50px;
     flex-grow: 1;
-    /* flex-basis: 0; */
     background-color: transparent;
   }
 </style>

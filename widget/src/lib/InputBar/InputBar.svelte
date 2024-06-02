@@ -23,7 +23,7 @@
 
   async function reset() {
     value = "";
-    await tick();
+    //await tick();
     autosize.update(textarea);
   }
 </script>
@@ -45,10 +45,8 @@
 
 <style>
   .inputBar {
-    /* display: flex;
-    flex-direction: row; */
+    line-height: 2rem;
     background-color: white;
-    /* border-top: 0.5px solid grey; */
     min-height: 40px;
     height: auto;
   }
