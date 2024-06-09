@@ -7,7 +7,7 @@
 </script>
 
 <div class="textMessage">
-  <p class={`sender ${variant}`}>You</p>
+  <p class={`sender ${variant}`}>{message?.sender ?? ' '}</p>
   <div class={`messageBubble ${variant}`}>
     <p>{message.message}</p>
   </div>
@@ -37,6 +37,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     clear: both;
+  }
+
+  p{
+    display: inline;
   }
 
   .buttonOption {
@@ -79,7 +83,9 @@
     border-radius: 20px;
     color: white;
     margin-top: 5px;
+    text-wrap: pretty;
     margin-bottom: 5px;
+    
     font-size: medium;
   }
   ::selection {
@@ -89,10 +95,13 @@
 
   .outgoing {
     float: right;
+    
   }
 
   .incoming {
     float: left;
+    background-color: gray;
+    max-width: 80%;
   }
 
   @media screen and (max-width: 600px) {
