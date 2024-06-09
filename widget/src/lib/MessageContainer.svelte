@@ -11,7 +11,7 @@
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
   import { fade, scale, slide, fly, crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import { quintOut } from "svelte/easing";
+  import { bounceInOut, quintOut } from "svelte/easing";
 
   let scrollContainer: HTMLDivElement;
 
@@ -23,23 +23,22 @@
       const transform = style.transform === "none" ? "" : style.transform;
 
       return {
-        duration: 600,
+        duration: 800,
         easing: quintOut,
-        css: (t) => `
-				transform: ${transform} scale(${t});
+        css: (t) => {console.log(t); return `
+				transform: ${transform} scale(${t*0.2+0.8});
 				opacity: ${t}
-			`,
+			`},
       };
     },
   });
 
-  onMount(()=>{
-    scrollContainer?.scrollTo(
-     {top:scrollContainer?.scrollHeight || 0,
-      behavior:'instant'
-     }
-    );
-  })
+  onMount(() => {
+    scrollContainer?.scrollTo({
+      top: scrollContainer?.scrollHeight || 0,
+      behavior: "instant",
+    });
+  });
 
   afterUpdate(() => {
     scrollContainer?.scrollTo(
@@ -60,6 +59,7 @@
   <div class="messageContainer" role="log" aria-live="assertive">
     {#each messageList as val (val.id)}
       <div
+
         in:receive={{ key: val.id }}
         out:send={{ key: val.id }}
         animate:flip={{ duration: 200 }}
@@ -70,6 +70,13 @@
         {#if val.type === "CUSTOM"}
           <HTMLMessage variant="incoming" content={val.content} />
         {/if}
+        <!-- {#if val.type === "PICKER"}
+          <BubblePickerMessage
+            variant="incoming"
+            content={val.content}
+            message={val.content}
+          />
+        {/if} -->
       </div>
     {/each}
   </div>

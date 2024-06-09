@@ -24,10 +24,19 @@ export interface TextMessageContent {
   contentType: "text";
   language?: string;
   footer?: any;
+  buttons?:string[]
+}
+
+export interface BubblePickerContent extends TextMessageContent {
+  buttons?: string[];
 }
 
 export interface TextMessage extends Message {
   content: TextMessageContent;
+}
+
+export interface BubblePickerMessage extends Message {
+  content: BubblePickerContent;
 }
 
 /**

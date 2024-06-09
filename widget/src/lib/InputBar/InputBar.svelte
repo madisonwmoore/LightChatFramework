@@ -31,6 +31,7 @@
 <div class="inputBar">
   <div class="wrapper">
     <textarea
+      aria-label="Message Input"
       on:keydown={handleKeyDown}
       bind:value={message}
       rows="1"

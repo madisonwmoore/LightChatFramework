@@ -1,5 +1,5 @@
 import FakeConnector from "../Connector/FakeConnector";
-import { Message, TextMessage } from "../Stores/MessageStore";
+import { BubblePickerMessage, Message, TextMessage } from "../Stores/MessageStore";
 import { v4 as uuidv4 } from "uuid";
 
 self.connections = [];
@@ -21,6 +21,12 @@ onconnect = (e) => {
 
   port.addEventListener("message", (e) => {
     console.log(e);
+
+    
+    
+   
+
+
     const workerResult = `Result: ${e.data[0] * e.data[1]}`;
     self.connections.forEach((port: MessagePort) => {
       const response:TextMessage={
@@ -28,20 +34,44 @@ onconnect = (e) => {
         datetime: 0,
         type: "TEXT",
         variant:'outgoing',
-        content: e.data.payload
+        content: {
+          message: e.data.payload,
+          contentType: "text"
+        }
       }
       port.postMessage(response);
     });
-
-    setTimeout(()=>{
-      self.connections.forEach((port: MessagePort) => {
-        const response:TextMessage={
+    let response:TextMessage
+    if(e.data.payload.includes('list')){
+       response={
+        id: uuidv4(),
+        datetime: 0,
+        type: "TEXT",
+        variant:'incoming',
+        content: {
+          message: "Here is a list",
+          buttons:["Button 1", "Button 2"],
+          contentType: "text"
+        }
+      }
+    }
+    else{
+        response={
           id: uuidv4(),
           datetime: 0,
           type: "TEXT",
           variant:'incoming',
-          content: "You Said: "+e.data.payload as string
+          content: {
+            message: "You Said: " + e.data.payload as string,
+            contentType: "text"
+          }
         }
+    }
+
+
+    setTimeout(()=>{
+      self.connections.forEach((port: MessagePort) => {
+       response
         port.postMessage(response);
       });
     },1000)
@@ -69,20 +99,20 @@ onconnect = (e) => {
     <text x="65" y="55" class="Rrrrr">Grumpy!</text>
   </svg>`;
 
-    setTimeout(()=>{
-      self.connections.forEach((port: MessagePort) => {
-        const response={
-          id: uuidv4(),
-          datetime: 0,
-          type: "CUSTOM",
-          variant:'incoming',
-          content,
-        };
-        port.postMessage(response);
-      });
-    },2000)
+    // setTimeout(()=>{
+    //   self.connections.forEach((port: MessagePort) => {
+    //     const response={
+    //       id: uuidv4(),
+    //       datetime: 0,
+    //       type: "CUSTOM",
+    //       variant:'incoming',
+    //       content,
+    //     };
+    //     port.postMessage(response);
+    //   });
+    // },2000)
 
-
+  
   });
 
   port.start();

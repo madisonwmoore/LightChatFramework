@@ -1,13 +1,26 @@
 <script lang="ts">
-  export let message: string;
+  import { type TextMessageContent } from "../../Stores/MessageStore";
+  import { connector } from "../../Stores/ConnectionStore";
+
+  export let message: TextMessageContent;
   export let variant;
 </script>
 
 <div class="textMessage">
   <p class={`sender ${variant}`}>You</p>
   <div class={`messageBubble ${variant}`}>
-    <p>{message}</p>
+    <p>{message.message}</p>
   </div>
+  {#if message.buttons}
+    <div class="buttonContainer">
+      {#each message.buttons as button}
+        <button
+          on:click={() => $connector?.sendTextMessage(button)}
+          class="buttonOption">{button}</button
+        >
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -17,6 +30,32 @@
     /* float:right; */
     font-size: smaller;
     margin-right: inherit;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    clear: both;
+  }
+
+  .buttonOption {
+    border: 1px solid #00529b;
+    border-radius: 15px;
+    background-color: transparent;
+    color: #00529b;
+    margin: 3px 5px;
+    padding: 5px 12px;
+  }
+
+  .buttonOption:hover {
+    background-color: #00539b;
+    color: white;
+  }
+
+  .buttonOption:active {
+    background-color: #00529b;
+    opacity: 0.5;
   }
 
   .textMessage {
@@ -33,7 +72,7 @@
     clear: both;
     display: block;
     text-align: left;
-    max-width: 80%;
+    max-width: 60%;
     float: right;
     background-color: #00529b;
     padding: 2px 10px;
@@ -43,8 +82,8 @@
     margin-bottom: 5px;
     font-size: medium;
   }
-  ::selection{
-    color:rgb(255, 195, 54);
+  ::selection {
+    color: rgb(255, 195, 54);
     background: rgb(30, 30, 30);
   }
 

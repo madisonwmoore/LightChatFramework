@@ -1,27 +1,29 @@
 <script>
   import { IconMessage } from "@tabler/icons-svelte";
+  import { MessageCircleMore } from 'lucide-svelte';
 </script>
 
-<button on:click class="launchButton">
-  <IconMessage color="white" size={20} />
+<button aria-label="Chat" on:click class="launchButton">
+  <MessageCircleMore color="white" size={30} />
 </button>
 
 <style>
 .launchButton {
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   position: fixed;
   right: 10px;
   bottom: 10px;
   padding: 0;
   display: flex;
+  border: none;
   align-items: center;
   justify-content: center;
-  background-color: gray;
-  border-width: 3px;
+  background-color: rgb(19, 91, 133);
+  /* border-width: 3px;
   border-style: solid;
-  border-color: rgb(183, 183, 183);
+  border-color: rgb(183, 183, 183); */
   -webkit-box-shadow: 7px 10px 20px -14px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 7px 10px 20px -14px rgba(0, 0, 0, 0.75);
   box-shadow: 7px 10px 20px -14px rgba(0, 0, 0, 0.75);
@@ -30,9 +32,9 @@
 
 .launchButton:hover {
   cursor: pointer;
-  border-color: aquamarine;
-  background-color: rgb(159, 159, 159);
-  transition: border-color 0.5s;
+ 
+  background-color: rgb(14, 67, 97);
+  transition: background-color 0.5s;
 }
 
 .launchButton:active {
