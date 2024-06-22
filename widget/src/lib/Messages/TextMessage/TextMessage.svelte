@@ -7,7 +7,7 @@
 </script>
 
 <div class="textMessage">
-  <p class={`sender ${variant}`}>{message?.sender ?? ' '}</p>
+  <p class={`sender ${variant}`}>{message?.sender ?? " "}</p>
   <div class={`messageBubble ${variant}`}>
     <p>{message.message}</p>
   </div>
@@ -39,7 +39,7 @@
     clear: both;
   }
 
-  p{
+  p {
     display: inline;
   }
 
@@ -85,7 +85,7 @@
     margin-top: 5px;
     text-wrap: pretty;
     margin-bottom: 5px;
-    
+
     font-size: medium;
   }
   ::selection {
@@ -95,7 +95,6 @@
 
   .outgoing {
     float: right;
-    
   }
 
   .incoming {

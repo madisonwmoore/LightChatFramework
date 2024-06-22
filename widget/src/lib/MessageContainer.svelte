@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate, beforeUpdate, onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import {
     type Message,
     messageStore,
@@ -8,10 +8,11 @@
     type TextMessage as tm,
   } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
+  import FileMessage from "./Messages/FileMessage/FileMessage.svelte";
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
-  import { fade, scale, slide, fly, crossfade } from "svelte/transition";
+  import { crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import { bounceInOut, quintOut } from "svelte/easing";
+  import {  quintOut } from "svelte/easing";
 
   let scrollContainer: HTMLDivElement;
 
@@ -67,6 +68,9 @@
         {#if val.type === "TEXT"}
           <TextMessage variant={val.variant} message={val.content} />
         {/if}
+        {#if val.type === "FILE"}
+        <FileMessage variant={val.variant} message={val.content} />
+      {/if}
         {#if val.type === "CUSTOM"}
           <HTMLMessage variant="incoming" content={val.content} />
         {/if}

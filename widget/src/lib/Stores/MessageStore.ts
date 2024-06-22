@@ -16,7 +16,7 @@ messageStore.subscribe((val) => {
   messages = val;
 });
 
-export type MessageType = "TEXT" | "PICKER" | "CUSTOM";
+export type MessageType = "TEXT" | "PICKER" | "CUSTOM" | "FILE";
 
 export interface TextMessageContent {
   sender?: string;

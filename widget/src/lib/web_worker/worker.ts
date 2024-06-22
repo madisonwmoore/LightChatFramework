@@ -55,6 +55,19 @@ onconnect = (e) => {
         }
       }
     }
+    if(e.data.payload.includes('file')){
+      response={
+       id: uuidv4(),
+       datetime: 0,
+       type: "FILE",
+       variant:'incoming',
+       content: {
+         message: "Here is a list",
+         buttons:["Button 1", "Button 2"],
+         contentType: "text"
+       }
+     }
+   }
     else if(e.data.payload.includes('fact')){
       response={
         id: uuidv4(),
