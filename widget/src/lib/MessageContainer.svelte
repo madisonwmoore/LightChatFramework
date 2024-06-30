@@ -3,9 +3,9 @@
   import {
     type Message,
     messageStore,
-    postMessage as pm,
-    updateMessage as um,
-    type TextMessage as tm,
+    // postMessage as pm,
+    // updateMessage as um,
+    // type TextMessage as tm,
   } from "./Stores/MessageStore";
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
   import FileMessage from "./Messages/FileMessage/FileMessage.svelte";

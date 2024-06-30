@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TextMessageContent } from "../../Stores/MessageStore";
+   import { type TextMessageContent } from "../../Stores/MessageStore";
 
     export let content:string;
     export let variant;
