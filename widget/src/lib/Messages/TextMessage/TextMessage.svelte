@@ -4,12 +4,17 @@
 
   export let message: TextMessageContent;
   export let variant;
+  export let sender: string;
 </script>
 
 <div class="textMessage">
-  <p class={`sender ${variant}`}>{message?.sender ?? " "}</p>
+  <p class={`sender ${variant}`}>{sender ?? ""}</p>
   <div class={`messageBubble ${variant}`}>
+    {#if typeof message.message ==='string'}
     <p>{message.message}</p>
+    {:else}
+    <div>{message.message}</div>
+    {/if}
   </div>
   {#if message.buttons}
     <div class="buttonContainer">
@@ -27,9 +32,10 @@
   .sender {
     text-align: right;
     display: block;
-    /* float:right; */
     font-size: smaller;
     margin-right: inherit;
+    margin: 0px 5px;
+    min-height: 1rem;
   }
 
   .buttonContainer {
@@ -68,24 +74,26 @@
     display: block;
   }
 
-  .textMessage p {
-    margin: 3px 5px;
+  
+
+  .messageBubble p {
+    text-indent: 0;
+    margin:3px 5px;
   }
 
   .messageBubble {
     clear: both;
     display: block;
     text-align: left;
-    max-width: 60%;
+    max-width: 80%;
     float: right;
     background-color: #00529b;
-    padding: 2px 10px;
+    padding: 5px 10px;
     border-radius: 20px;
     color: white;
-    margin-top: 5px;
+    margin-top: 2px;
     text-wrap: pretty;
     margin-bottom: 5px;
-
     font-size: medium;
   }
   ::selection {
@@ -99,7 +107,7 @@
 
   .incoming {
     float: left;
-    background-color: gray;
+    /* background-color: gray; */
     max-width: 80%;
   }
 

@@ -13,11 +13,12 @@
   let userVideoElement:HTMLVideoElement;
 
   const constraints = (window.constraints = {
-    audio: false,
+    audio: true,
     video: true,
   });
 
-  function handleSuccess(stream) {
+  function handleSuccess(stream:any) {
+    try{
     
     const videoTracks = stream.getVideoTracks();
     console.log("Got stream with constraints:", constraints);
@@ -26,6 +27,10 @@
     videoElement.srcObject = stream;
     userVideoElement.srcObject=stream;
     console.log(window.stream)
+    }
+    catch(err){
+      console.error(err)
+    }
   }
 
   const startStream = async () => {
@@ -33,7 +38,7 @@
     console.log("Starting")
     
     try {
-      stream = await navigator.mediaDevices.getUserMedia(constraints);
+      stream = await window.navigator.mediaDevices.getUserMedia(constraints);
       handleSuccess(stream);
       // e.target.disabled = true;
     } catch (e) {
@@ -49,11 +54,11 @@
 
 <div class="header">
   <div class="content">
-    <slot></slot>
+    <slot></slot><button on:click={() => startStream()}>Start</button>
     <div class="buttons">
       <button><IconMinus /></button>
       <button><IconX /></button>
-    </div>  <button on:click={() => startStream()}>Start</button>
+    </div>  
   </div>
   {#if isVideo}
     <div transition:slide class="streaming_container">
@@ -69,7 +74,7 @@
   .header {
     width: 100%;
     min-height: 50px;
-    color: rgb(178, 218, 0);
+    color: rgb(178, 218, 0); 
     background-image: linear-gradient(
       to right,
       #0f5096e0,

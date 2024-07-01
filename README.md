@@ -1,2 +1,4 @@
 # LightChatFramework
-Lightweight Chat Framework
+Lightweight Chat Framework 
+
+- Provides a Chat Widget UI.

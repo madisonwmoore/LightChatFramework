@@ -12,7 +12,7 @@
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
   import { crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import {  quintOut } from "svelte/easing";
+  import { quintOut } from "svelte/easing";
 
   let scrollContainer: HTMLDivElement;
 
@@ -26,10 +26,13 @@
       return {
         duration: 800,
         easing: quintOut,
-        css: (t) => {console.log(t); return `
-				transform: ${transform} scale(${t*0.2+0.8});
+        css: (t) => {
+          console.log(t);
+          return `
+				transform: ${transform} scale(${t * 0.2 + 0.8});
 				opacity: ${t}
-			`},
+			`;
+        },
       };
     },
   });
@@ -60,17 +63,27 @@
   <div class="messageContainer" role="log" aria-live="assertive">
     {#each messageList as val (val.id)}
       <div
-
         in:receive={{ key: val.id }}
         out:send={{ key: val.id }}
         animate:flip={{ duration: 200 }}
       >
         {#if val.type === "TEXT"}
-          <TextMessage variant={val.variant} message={val.content} />
+          <TextMessage
+            sender={val.sender}
+            variant={val.variant}
+            message={val.content}
+          />
+        {/if}
+        {#if val.type === "HTML"}
+          <TextMessage
+            sender={val.sender}
+            variant={val.variant}
+            message={val.content}
+          />
         {/if}
         {#if val.type === "FILE"}
-        <FileMessage variant={val.variant} message={val.content} />
-      {/if}
+          <FileMessage variant={val.variant} message={val.content} />
+        {/if}
         {#if val.type === "CUSTOM"}
           <HTMLMessage variant="incoming" content={val.content} />
         {/if}

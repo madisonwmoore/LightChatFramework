@@ -48,6 +48,7 @@ onconnect = (e) => {
         datetime: 0,
         type: "TEXT",
         variant:'incoming',
+        
         content: {
           message: "Here is a list",
           buttons:["Button 1", "Button 2"],
@@ -83,13 +84,13 @@ onconnect = (e) => {
     }
     else{
         response={
-          sender:'bot',
+          sender:'Bot',
           id: uuidv4(),
           datetime: 0,
           type: "TEXT",
           variant:'incoming',
           content: {
-            message: "You Said: " + e.data.payload as string,
+            message: "You Said: " +`<i>${e.data.payload}</i>` as string,
             contentType: "text"
           }
         }
