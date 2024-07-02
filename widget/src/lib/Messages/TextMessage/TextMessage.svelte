@@ -5,15 +5,16 @@
   export let message: TextMessageContent;
   export let variant;
   export let sender: string;
+  export let isTranscript: boolean;
 </script>
 
-<div class="textMessage">
-  <p class={`sender ${variant}`}>{sender ?? ""}</p>
-  <div class={`messageBubble ${variant}`}>
-    {#if typeof message.message ==='string'}
-    <p>{message.message}</p>
+<div class={`textMessage ${variant}`}>
+  <p class={`sender`}>{sender ?? ""}</p>
+  <div class={`messageBubble`}>
+    {#if typeof message.message === "string"}
+      <p>{message.message}</p>
     {:else}
-    <div>{message.message}</div>
+      <div>{message.message}</div>
     {/if}
   </div>
   {#if message.buttons}
@@ -33,10 +34,26 @@
     text-align: right;
     display: block;
     font-size: smaller;
+    font-weight: bold;
     margin-right: inherit;
     margin: 0px 5px;
     min-height: 1rem;
   }
+
+  .outgoing .sender,.outgoing .messageBubble{
+    float:right;
+  }
+
+  .incoming .sender, .incoming .messageBubble{
+    float:left;
+  }
+
+  .incoming .messageBubble{
+    background-color: #e8eef7;
+    color: rgb(5, 5, 5);
+  }
+
+
 
   .buttonContainer {
     display: flex;
@@ -68,24 +85,26 @@
     opacity: 0.5;
   }
 
+  .buttonOption:first-child{
+    margin-left: 0px;
+  }
+
   .textMessage {
     width: 100%;
     margin-right: 20px;
     display: block;
   }
 
-  
-
   .messageBubble p {
     text-indent: 0;
-    margin:3px 5px;
+    margin: 3px 5px;
   }
 
   .messageBubble {
     clear: both;
     display: block;
     text-align: left;
-    max-width: 80%;
+    /* max-width: 80%; */
     float: right;
     background-color: #00529b;
     padding: 5px 10px;
@@ -100,6 +119,8 @@
     color: rgb(255, 195, 54);
     background: rgb(30, 30, 30);
   }
+
+
 
   .outgoing {
     float: right;

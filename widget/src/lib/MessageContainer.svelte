@@ -59,6 +59,7 @@
 
 <div class="container" bind:this={scrollContainer}>
   <div class="flexBox"></div>
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div tabindex="0" class="messageContainer" role="log" aria-live="assertive">
     {#each messageList as val (val.id)}
       <div
@@ -86,13 +87,6 @@
         {#if val.type === "CUSTOM"}
           <HTMLMessage variant="incoming" content={val.content} />
         {/if}
-        <!-- {#if val.type === "PICKER"}
-          <BubblePickerMessage
-            variant="incoming"
-            content={val.content}
-            message={val.content}
-          />
-        {/if} -->
       </div>
     {/each}
   </div>
