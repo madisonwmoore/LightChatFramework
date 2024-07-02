@@ -27,7 +27,6 @@
         duration: 800,
         easing: quintOut,
         css: (t) => {
-          console.log(t);
           return `
 				transform: ${transform} scale(${t * 0.2 + 0.8});
 				opacity: ${t}
@@ -60,7 +59,7 @@
 
 <div class="container" bind:this={scrollContainer}>
   <div class="flexBox"></div>
-  <div class="messageContainer" role="log" aria-live="assertive">
+  <div tabindex="0" class="messageContainer" role="log" aria-live="assertive">
     {#each messageList as val (val.id)}
       <div
         in:receive={{ key: val.id }}

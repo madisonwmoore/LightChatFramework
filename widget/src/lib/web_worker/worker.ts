@@ -43,6 +43,7 @@ onconnect = (e) => {
     });
     let response:TextMessage
     if(e.data.payload.includes('list')){
+      console.log("List")
        response={
         id: uuidv4(),
         datetime: 0,
@@ -56,7 +57,7 @@ onconnect = (e) => {
         }
       }
     }
-    if(e.data.payload.includes('file')){
+    else if(e.data.payload.includes('file')){
       response={
        id: uuidv4(),
        datetime: 0,
