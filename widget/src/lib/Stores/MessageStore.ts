@@ -21,7 +21,7 @@ export type MessageType = "TEXT" | "PICKER" | "CUSTOM" | "FILE" | "HTML";
 export interface TextMessageContent {
   sender?: string;
   message: string;
-  contentType: "text";
+  contentType: "text" | 'html';
   language?: string;
   footer?: any;
   buttons?:string[]

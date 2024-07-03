@@ -91,11 +91,11 @@ onconnect = (e) => {
           sender:'Bot',
           id: uuidv4(),
           datetime: 0,
-          type: "TEXT",
+          type: "HTML",
           variant:'incoming',
           content: {
             message: "You Said: " +`<i>${e.data.payload}</i>` as string,
-            contentType: "text"
+            contentType: "html"
           }
         }
     }

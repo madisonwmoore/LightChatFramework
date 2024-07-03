@@ -11,10 +11,11 @@
 <div class={`textMessage ${variant}`}>
   <p class={`sender`}>{sender ?? ""}</p>
   <div class={`messageBubble`}>
-    {#if typeof message.message === "string"}
-      <p>{message.message}</p>
-    {:else}
-      <div>{message.message}</div>
+    {#if message.contentType==='html'}
+      {@html message.message}
+    {:else} 
+    <p>{message.message}</p>
+     
     {/if}
   </div>
   {#if message.buttons}
