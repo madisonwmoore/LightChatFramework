@@ -58,6 +58,23 @@ onconnect = (e) => {
         }
       }
     }
+    else if(e.data.payload.includes('potato')){
+      console.log("List")
+       response={
+        sender:'Bot',
+        id: uuidv4(),
+        datetime: 0,
+        type: "TEXT",
+        variant:'incoming',
+        
+        content: {
+          message: `<span><h1 style="color:red;">Facts</h1></span><div><ul><li>This is a fact</li></ul></div>`,
+
+          buttons:["Button 1", "Button 2", "Button 3"],
+          contentType: "html"
+        }
+      }
+    }
     else if(e.data.payload.includes('file')){
       response={
        id: uuidv4(),

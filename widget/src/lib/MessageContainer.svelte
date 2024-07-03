@@ -61,7 +61,7 @@
   <div class="flexBox"></div>
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div tabindex="0" class="messageContainer" role="log" aria-live="assertive">
-    {#each messageList as val (val.id)}
+    {#each messageList as val,i (val.id)}
       <div
         in:receive={{ key: val.id }}
         out:send={{ key: val.id }}
@@ -69,6 +69,7 @@
       >
         {#if val.type === "TEXT"}
           <TextMessage
+            isClicked={i!==messageList.length-1}
             sender={val.sender}
             variant={val.variant}
             message={val.content}
@@ -76,6 +77,7 @@
         {/if}
         {#if val.type === "HTML"}
           <TextMessage
+            isClicked={i!==messageList.length-1}
             sender={val.sender}
             variant={val.variant}
             message={val.content}

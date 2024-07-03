@@ -5,24 +5,25 @@
   export let message: TextMessageContent;
   export let variant;
   export let sender: string;
-  export let isTranscript: boolean;
+  export let isTranscript: boolean=false;
+  export let isClicked=false;
 </script>
 
 <div class={`textMessage ${variant}`}>
   <p class={`sender`}>{sender ?? ""}</p>
   <div class={`messageBubble`}>
-    {#if message.contentType==='html'}
+    {#if message.contentType === "html"}
       {@html message.message}
-    {:else} 
-    <p>{message.message}</p>
-     
+    {:else}
+      <p>{message.message}</p>
     {/if}
   </div>
   {#if message.buttons}
     <div class="buttonContainer">
       {#each message.buttons as button}
-        <button
-          on:click={() => $connector?.sendTextMessage(button)}
+        <button 
+          disabled={isClicked}
+          on:click={() => {$connector?.sendTextMessage(button);}}
           class="buttonOption">{button}</button
         >
       {/each}
@@ -41,20 +42,20 @@
     min-height: 1rem;
   }
 
-  .outgoing .sender,.outgoing .messageBubble{
-    float:right;
+  .outgoing .sender,
+  .outgoing .messageBubble {
+    float: right;
   }
 
-  .incoming .sender, .incoming .messageBubble{
-    float:left;
+  .incoming .sender,
+  .incoming .messageBubble {
+    float: left;
   }
 
-  .incoming .messageBubble{
+  .incoming .messageBubble {
     background-color: #e8eef7;
     color: rgb(5, 5, 5);
   }
-
-
 
   .buttonContainer {
     display: flex;
@@ -76,17 +77,23 @@
     padding: 5px 12px;
   }
 
-  .buttonOption:hover {
+  .buttonOption:enabled:hover {
     background-color: #00539b;
     color: white;
   }
 
-  .buttonOption:active {
+  .buttonOption:enabled:active {
     background-color: #00529b;
     opacity: 0.5;
   }
 
-  .buttonOption:first-child{
+  .buttonOption:disabled{
+    color: gray;
+    border-color: gray;
+    opacity: 0.5;
+  }
+
+  .buttonOption:first-child {
     margin-left: 0px;
   }
 
@@ -120,8 +127,6 @@
     color: rgb(255, 195, 54);
     background: rgb(30, 30, 30);
   }
-
-
 
   .outgoing {
     float: right;

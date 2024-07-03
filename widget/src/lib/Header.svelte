@@ -2,6 +2,7 @@
   import { IconX, IconMinus } from "@tabler/icons-svelte";
   import { messageStore } from "./Stores/MessageStore";
   import { slide } from "svelte/transition";
+  import { X } from 'lucide-svelte';
 
 
   messageStore.subscribe((m) => {
@@ -46,18 +47,13 @@
       // handleError(e);
     }
   };
-
-  // onMount(()=>{
-  //   startStream()
-  // })
 </script>
 
 <div class="header">
   <div class="content">
     <slot></slot><button on:click={() => startStream()}>Start</button>
     <div class="buttons">
-      <button><IconMinus /></button>
-      <button><IconX /></button>
+      <button><X color="rgb(178, 218, 0)"/></button>
     </div>  
   </div>
   {#if isVideo}

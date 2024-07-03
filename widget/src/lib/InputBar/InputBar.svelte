@@ -3,11 +3,15 @@
   import autosize from "svelte-autosize";
   import { connector } from "../Stores/ConnectionStore";
   import { SendHorizontal } from 'lucide-svelte';
+  import { tick } from 'svelte';
 
   let message;
+  let textarea;
+  let value;
+
   function sendMessage() {
-    $connector.sendTextMessage(message);
-    message = "";
+    $connector.sendTextMessage(value);
+    value = "";
     reset();
   }
 
@@ -15,15 +19,16 @@
     if (e.code === "Enter") {
       e.preventDefault();
 
-      if (message.length > 0) {
+      if (value.length > 0) {
         sendMessage();
+        reset();
       }
     }
   }
 
   async function reset() {
     value = "";
-    //await tick();
+    await tick();
     autosize.update(textarea);
   }
 </script>
@@ -33,9 +38,10 @@
     <textarea
       aria-label="Message Input"
       on:keydown={handleKeyDown}
-      bind:value={message}
+      bind:value
       rows="1"
       use:autosize
+      bind:this={textarea}
       class="inputText"
       placeholder="Send a Message"
     />
