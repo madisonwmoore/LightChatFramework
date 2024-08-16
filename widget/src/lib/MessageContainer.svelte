@@ -55,13 +55,22 @@
   messageStore.subscribe((val) => {
     messageList = val;
   });
+  let shouldScroll = false;
+  const handleScroll = () => {
+    shouldScroll = true;
+    // setTimeout(()=>{shouldScroll=false},1000)
+  };
 </script>
 
-<div class="container" bind:this={scrollContainer}>
+<div
+  class={"".concat("container ", !shouldScroll ? "scrollBarDisabled " : "")}
+  on:scroll={handleScroll}
+  bind:this={scrollContainer}
+>
   <div class="flexBox"></div>
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div tabindex="0" class="messageContainer" role="log" aria-live="assertive">
-    {#each messageList as val,i (val.id)}
+    {#each messageList as val, i (val.id)}
       <div
         in:receive={{ key: val.id }}
         out:send={{ key: val.id }}
@@ -69,7 +78,7 @@
       >
         {#if val.type === "TEXT"}
           <TextMessage
-            isClicked={i!==messageList.length-1}
+            isClicked={i !== messageList.length - 1}
             sender={val.sender}
             variant={val.variant}
             message={val.content}
@@ -77,7 +86,7 @@
         {/if}
         {#if val.type === "HTML"}
           <TextMessage
-            isClicked={i!==messageList.length-1}
+            isClicked={i !== messageList.length - 1}
             sender={val.sender}
             variant={val.variant}
             message={val.content}
@@ -103,6 +112,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  .scrollBarDisabled {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+  }
+  .scrollBarDisabled::-webkit-scrollbar {
+    display: none;
   }
 
   .flexBox {

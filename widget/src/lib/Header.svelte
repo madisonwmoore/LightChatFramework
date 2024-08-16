@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconX, IconMinus } from "@tabler/icons-svelte";
+  // import { IconX, IconMinus } from "@tabler/icons-svelte";
   import { messageStore } from "./Stores/MessageStore";
   import { slide } from "svelte/transition";
   import { X } from 'lucide-svelte';

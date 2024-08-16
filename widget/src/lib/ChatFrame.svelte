@@ -11,11 +11,11 @@
   import Connector from "./Connector/Connector";
   import { connector } from "./Stores/ConnectionStore";
   import { onMount } from "svelte";
-  // import { postMessage, type Message } from "./Stores/MessageStore";
+  import ErrorState from "./ErrorState.svelte";
+  import { postMessage, type Message } from "./Stores/MessageStore";
+  import {appStateStore} from "./Stores/AppState";
 
-  function yes() {
-    alert("Moo");
-  }
+ 
 
   onMount(() => {
     {
@@ -40,6 +40,7 @@
     >
       <Header><b>Chat with Us</b></Header>
       <MessageContainer />
+      <!-- <ErrorState/> -->
       <InputBar />
     </div>{/if}
   <LaunchButton on:click={() => (isVisible = !isVisible)} />
