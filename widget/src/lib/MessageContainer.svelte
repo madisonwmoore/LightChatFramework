@@ -149,6 +149,7 @@
     position: relative;
     bottom: 0px;
     padding-top: 10px;
+    max-width: 100%;
     flex-direction: column;
     justify-content: end;
     padding-bottom: 50px;
@@ -157,5 +158,6 @@
   }
   .message{
     max-width: 100%;
+   
   }
 </style>

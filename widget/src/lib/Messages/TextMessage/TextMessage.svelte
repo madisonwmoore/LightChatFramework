@@ -131,6 +131,7 @@
 
   .outgoing {
     float: right;
+    max-width: 80%;
   }
 
   .incoming {
