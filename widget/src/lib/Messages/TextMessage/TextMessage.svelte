@@ -112,6 +112,7 @@
     clear: both;
     display: block;
     text-align: left;
+    word-break: break-all;
     /* max-width: 80%; */
     float: right;
     background-color: #00529b;

@@ -13,9 +13,12 @@
   import { onMount } from "svelte";
   import ErrorState from "./ErrorState.svelte";
   import { postMessage, type Message } from "./Stores/MessageStore";
-  import {appStateStore} from "./Stores/AppState";
+  import { appStateStore } from "./Stores/AppState";
+  import Overlay from "./Overlay.svelte";
+  import { IconTruckDelivery } from "@tabler/icons-svelte";
 
- 
+  let onDrag:boolean;
+
 
   onMount(() => {
     {
@@ -28,16 +31,43 @@
       destroy: () => {},
     };
   }
+  function handledragenter(e){
+    onDrag=true;
+    console.log("Drag Enter")
+  }
+
+  function handledragleave(e){
+    e.stopPropagation()
+    onDrag=false;
+    console.log("Drag Leave")
+  }
+
+  function handledrop(e:any){
+    e.preventDefault();
+    alert(e)
+  }
 </script>
 
-<div>
+<div >
   {#if isVisible}
     <div
+      role="log"
+      on:dragenter={handledragenter}
+      on:dragleave={handledragleave}
+      on:drop={handledrop}
       use:widgetOpened
       out:fly={{ y: 100, easing: quadIn }}
       in:fly={{ y: 100, easing: quintOut }}
       class="chatframe"
     >
+    {#if onDrag}
+      <Overlay>
+        <div class="file_overlay">
+          <h1>File</h1>
+          <p>Drop file </p>
+        </div>
+      </Overlay>
+      {/if}
       <Header><b>Chat with Us</b></Header>
       <MessageContainer />
       <!-- <ErrorState/> -->
@@ -80,6 +110,11 @@
       top: 0px;
       right: 0px;
       bottom: 0px;
+    }
+
+    .file_overlay{
+      align-self: center;
+      display: inline;
     }
   }
 

@@ -72,6 +72,7 @@
   <div tabindex="0" class="messageContainer" role="log" aria-live="assertive">
     {#each messageList as val, i (val.id)}
       <div
+        class="message"
         in:receive={{ key: val.id }}
         out:send={{ key: val.id }}
         animate:flip={{ duration: 200 }}
@@ -153,5 +154,8 @@
     padding-bottom: 50px;
     flex-grow: 1;
     background-color: transparent;
+  }
+  .message{
+    max-width: 100%;
   }
 </style>
