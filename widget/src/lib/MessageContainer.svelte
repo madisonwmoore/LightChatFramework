@@ -96,13 +96,14 @@
 
 <style>
   .container {
-    overflow: auto;
+    overflow-y: auto;
     overflow-x: hidden;
     scroll-behavior: smooth;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
+    scrollbar-width: thin;
   }
 
   .flexBox {
@@ -135,5 +136,6 @@
     padding-bottom: 50px;
     flex-grow: 1;
     background-color: transparent;
+    
   }
 </style>

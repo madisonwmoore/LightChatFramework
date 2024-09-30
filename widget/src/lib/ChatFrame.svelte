@@ -5,6 +5,7 @@
   import MessageContainer from "./MessageContainer.svelte";
   import Header from "./Header.svelte";
   import LaunchButton from "./LaunchButton/LaunchButton.svelte";
+  import Overlay from "./Overlay/Overlay.svelte";
   import InputBar from "./InputBar/InputBar.svelte";
   export let isVisible = false;
   import { quintOut, quadIn } from "svelte/easing";
@@ -28,16 +29,34 @@
       destroy: () => {},
     };
   }
+  let fileDrag = false;
 </script>
 
 <div>
   {#if isVisible}
     <div
+      role="log"
+      on:drop={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(e)
+        fileDrag = false;
+      }}
+      on:dragleave={(e) => {
+        e.preventDefault();
+      }}
+      on:dragenter={(e) => {
+        e.preventDefault();
+        fileDrag = true;
+      }}
       use:widgetOpened
       out:fly={{ y: 100, easing: quadIn }}
       in:fly={{ y: 100, easing: quintOut }}
       class="chatframe"
     >
+      {#if fileDrag}
+        <Overlay bind:isFile={fileDrag}/>
+      {/if}
       <Header><b>Chat with Us</b></Header>
       <MessageContainer />
       <InputBar />
@@ -56,7 +75,7 @@
     width: 500px;
     position: fixed;
     padding-bottom: 10px;
-    bottom: 50px;
+    bottom: 60px;
     right: 20px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
