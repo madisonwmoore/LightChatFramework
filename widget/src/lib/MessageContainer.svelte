@@ -10,9 +10,13 @@
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
   import FileMessage from "./Messages/FileMessage/FileMessage.svelte";
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
+   import Ellipsis from "./Ellipsis.svelte"
   import { crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
+  import { SyncLoader } from 'svelte-loading-spinners';
+  import { LoadEllipsis } from 'svelte-loading-animation';
+ 
 
   let scrollContainer: HTMLDivElement;
 
@@ -55,21 +59,31 @@
   messageStore.subscribe((val) => {
     messageList = val;
   });
+  let shouldScroll = false;
+  const handleScroll = () => {
+    shouldScroll = true;
+    // setTimeout(()=>{shouldScroll=false},1000)
+  };
 </script>
 
-<div class="container" bind:this={scrollContainer}>
+<div
+  class={"".concat("container ", !shouldScroll ? "scrollBarDisabled " : "")}
+  on:scroll={handleScroll}
+  bind:this={scrollContainer}
+>
   <div class="flexBox"></div>
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
   <div tabindex="0" class="messageContainer" role="log" aria-live="assertive">
-    {#each messageList as val,i (val.id)}
+    {#each messageList as val, i (val.id)}
       <div
+        class="message"
         in:receive={{ key: val.id }}
         out:send={{ key: val.id }}
         animate:flip={{ duration: 200 }}
       >
         {#if val.type === "TEXT"}
           <TextMessage
-            isClicked={i!==messageList.length-1}
+            isClicked={i !== messageList.length - 1}
             sender={val.sender}
             variant={val.variant}
             message={val.content}
@@ -77,7 +91,7 @@
         {/if}
         {#if val.type === "HTML"}
           <TextMessage
-            isClicked={i!==messageList.length-1}
+            isClicked={i !== messageList.length - 1}
             sender={val.sender}
             variant={val.variant}
             message={val.content}
@@ -92,6 +106,11 @@
       </div>
     {/each}
   </div>
+  
+ <div class="loading-container">
+     <!-- <SyncLoader size="20" color="#a6a6a6"  unit="px" duration="1s"/> -->
+      <Ellipsis size="30px"/> <p>Connecting</p>
+  </div>
 </div>
 
 <style>
@@ -104,6 +123,15 @@
     display: flex;
     flex-direction: column;
     scrollbar-width: thin;
+  }
+
+  .scrollBarDisabled {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+  }
+  .scrollBarDisabled::-webkit-scrollbar {
+    display: none;
   }
 
   .flexBox {
@@ -131,11 +159,25 @@
     position: relative;
     bottom: 0px;
     padding-top: 10px;
+    max-width: 100%;
     flex-direction: column;
     justify-content: end;
     padding-bottom: 50px;
     flex-grow: 1;
     background-color: transparent;
     
+  }
+  .message{
+    max-width: 100%;
+   
+  }
+
+  .loading-container{
+    margin:3px 10px;
+    display: flex;
+    justify-items: start;
+    align-items: center;
+    position: sticky;
+    bottom:0;
   }
 </style>

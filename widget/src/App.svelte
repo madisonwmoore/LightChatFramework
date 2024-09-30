@@ -20,7 +20,6 @@
   <h1>Vite + Svelte</h1>
 
   <div class="card">
-    <!-- <Counter /> -->
   </div>
 <chat-widget/>
 

@@ -12,11 +12,13 @@
   import Connector from "./Connector/Connector";
   import { connector } from "./Stores/ConnectionStore";
   import { onMount } from "svelte";
-  // import { postMessage, type Message } from "./Stores/MessageStore";
+  import ErrorState from "./ErrorState.svelte";
+  import { postMessage, type Message } from "./Stores/MessageStore";
+  import { appStateStore } from "./Stores/AppState";
+  import { IconTruckDelivery } from "@tabler/icons-svelte";
 
-  function yes() {
-    alert("Moo");
-  }
+  let onDrag:boolean;
+
 
   onMount(() => {
     {
@@ -29,36 +31,46 @@
       destroy: () => {},
     };
   }
-  let fileDrag = false;
+  function handledragenter(e){
+    onDrag=true;
+    console.log("Drag Enter")
+  }
+
+  function handledragleave(e){
+    e.stopPropagation()
+    onDrag=false;
+    console.log("Drag Leave")
+  }
+
+  function handledrop(e:any){
+    e.preventDefault();
+    alert(e)
+  }
 </script>
 
-<div>
+<div >
   {#if isVisible}
     <div
       role="log"
-      on:drop={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(e)
-        fileDrag = false;
-      }}
-      on:dragleave={(e) => {
-        e.preventDefault();
-      }}
-      on:dragenter={(e) => {
-        e.preventDefault();
-        fileDrag = true;
-      }}
+      on:dragenter={handledragenter}
+      on:dragleave={handledragleave}
+      on:drop={handledrop}
       use:widgetOpened
       out:fly={{ y: 100, easing: quadIn }}
       in:fly={{ y: 100, easing: quintOut }}
       class="chatframe"
     >
-      {#if fileDrag}
-        <Overlay bind:isFile={fileDrag}/>
+    {#if onDrag}
+      <Overlay>
+        <div class="file_overlay">
+          <h1>File</h1>
+          <p>Drop file </p>
+        </div>
+      </Overlay>
       {/if}
       <Header><b>Chat with Us</b></Header>
       <MessageContainer />
+      <!-- <ErrorState/> -->
       <InputBar />
     </div>{/if}
   <LaunchButton on:click={() => (isVisible = !isVisible)} />
@@ -98,6 +110,11 @@
       top: 0px;
       right: 0px;
       bottom: 0px;
+    }
+
+    .file_overlay{
+      align-self: center;
+      display: inline;
     }
   }
 

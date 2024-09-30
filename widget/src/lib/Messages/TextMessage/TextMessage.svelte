@@ -112,6 +112,7 @@
     clear: both;
     display: block;
     text-align: left;
+    word-break: break-all;
     /* max-width: 80%; */
     float: right;
     background-color: #00529b;
@@ -130,12 +131,13 @@
 
   .outgoing {
     float: right;
+    max-width: 80%;
   }
 
   .incoming {
     float: left;
     /* background-color: gray; */
-    max-width: 80%;
+    max-width: 90%;
   }
 
   @media screen and (max-width: 600px) {

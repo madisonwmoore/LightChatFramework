@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconX, IconMinus } from "@tabler/icons-svelte";
+  // import { IconX, IconMinus } from "@tabler/icons-svelte";
   import { messageStore } from "./Stores/MessageStore";
   import { slide } from "svelte/transition";
   import { X } from 'lucide-svelte';
@@ -81,7 +81,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 5px;
-    /* z-index:6000; */
+    z-index:6000;
   }
 
   .content {
