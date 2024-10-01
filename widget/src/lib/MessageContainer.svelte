@@ -10,13 +10,10 @@
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
   import FileMessage from "./Messages/FileMessage/FileMessage.svelte";
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
-   import Ellipsis from "./Ellipsis.svelte"
+  import Ellipsis from "./Ellipsis.svelte";
   import { crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
-  import { SyncLoader } from 'svelte-loading-spinners';
-  import { LoadEllipsis } from 'svelte-loading-animation';
- 
 
   let scrollContainer: HTMLDivElement;
 
@@ -106,10 +103,10 @@
       </div>
     {/each}
   </div>
-  
- <div class="loading-container">
-     <!-- <SyncLoader size="20" color="#a6a6a6"  unit="px" duration="1s"/> -->
-      <Ellipsis size="30px"/> <p>Connecting</p>
+
+  <div class="loading-container">
+    <!-- <SyncLoader size="20" color="#a6a6a6"  unit="px" duration="1s"/> -->
+    <Ellipsis size="30px" />
   </div>
 </div>
 
@@ -165,19 +162,17 @@
     padding-bottom: 50px;
     flex-grow: 1;
     background-color: transparent;
-    
   }
-  .message{
+  .message {
     max-width: 100%;
-   
   }
 
-  .loading-container{
-    margin:3px 10px;
+  .loading-container {
+    margin: 10px 25px;
     display: flex;
     justify-items: start;
     align-items: center;
     position: sticky;
-    bottom:0;
+    bottom: 0;
   }
 </style>

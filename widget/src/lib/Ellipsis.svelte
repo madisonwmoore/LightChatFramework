@@ -3,6 +3,9 @@
     export let color = '#ff3e00'
   </script>
   
+
+  <div class="ellipsis" style="--size:{size};--color:{color}"><div></div><div></div><div></div><div></div></div>
+
   <style>
     .ellipsis {
       display: inline-flex;
@@ -60,5 +63,3 @@
       }
     }
   </style>
-  
-  <div class="ellipsis" style="--size:{size};--color:{color}"><div></div><div></div><div></div><div></div></div>
