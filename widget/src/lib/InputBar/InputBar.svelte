@@ -10,9 +10,11 @@
   let value;
 
   function sendMessage() {
+    if(value.length>0){
     $connector.sendTextMessage(value);
     value = "";
     reset();
+  }
   }
 
   function handleKeyDown(e) {
@@ -45,7 +47,7 @@
       class="inputText"
       placeholder="Send a Message"
     />
-    <button on:click={() => sendMessage()} class="sendButton"> <SendHorizontal color="gray"/> </button>
+    <button disabled={value>0} on:click={() => sendMessage()} class="sendButton"> <SendHorizontal color="gray"/> </button>
   </div>
 
 </div>

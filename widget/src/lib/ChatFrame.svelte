@@ -5,6 +5,7 @@
   import MessageContainer from "./MessageContainer.svelte";
   import Header from "./Header.svelte";
   import LaunchButton from "./LaunchButton/LaunchButton.svelte";
+  import Overlay from "./Overlay/Overlay.svelte";
   import InputBar from "./InputBar/InputBar.svelte";
   export let isVisible = false;
   import { quintOut, quadIn } from "svelte/easing";
@@ -14,7 +15,6 @@
   import ErrorState from "./ErrorState.svelte";
   import { postMessage, type Message } from "./Stores/MessageStore";
   import { appStateStore } from "./Stores/AppState";
-  import Overlay from "./Overlay.svelte";
   import { IconTruckDelivery } from "@tabler/icons-svelte";
 
   let onDrag:boolean;
@@ -89,7 +89,7 @@
     width: 500px;
     position: fixed;
     padding-bottom: 10px;
-    bottom: 50px;
+    bottom: 60px;
     right: 20px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);

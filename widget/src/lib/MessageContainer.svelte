@@ -10,6 +10,7 @@
   import TextMessage from "./Messages/TextMessage/TextMessage.svelte";
   import FileMessage from "./Messages/FileMessage/FileMessage.svelte";
   import HTMLMessage from "./Messages/HTMLMessage/HTMLMessage.svelte";
+  import Ellipsis from "./Ellipsis.svelte";
   import { crossfade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
@@ -105,6 +106,11 @@
       </div>
     {/each}
   </div>
+
+  <div class="loading-container">
+    <!-- <SyncLoader size="20" color="#a6a6a6"  unit="px" duration="1s"/> -->
+    <Ellipsis size="30px" />
+  </div>
 </div>
 
 <style>
@@ -122,6 +128,7 @@
     padding-left: (100vw - 100%);
     display: flex;
     flex-direction: column;
+    scrollbar-width: thin;
   }
 
 
@@ -174,5 +181,14 @@
   }
   .message {
     max-width: 100%;
+  }
+
+  .loading-container {
+    margin: 10px 25px;
+    display: flex;
+    justify-items: start;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
   }
 </style>

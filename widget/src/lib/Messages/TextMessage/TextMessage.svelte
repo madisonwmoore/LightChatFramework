@@ -137,8 +137,7 @@
   .incoming {
     float: left;
     /* background-color: gray; */
-    margin-left:10px;
-    /* max-width: 80%; */
+    max-width: 90%;
   }
 
   @media screen and (max-width: 600px) {
