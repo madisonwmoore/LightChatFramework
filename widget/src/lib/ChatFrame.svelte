@@ -32,12 +32,14 @@
     };
   }
   function handledragenter(e){
+    e.preventDefault();
     onDrag=true;
     console.log("Drag Enter")
   }
 
   function handledragleave(e){
-    e.stopPropagation()
+    e.preventDefault();
+    // e.stopPropagation();
     onDrag=false;
     console.log("Drag Leave")
   }
@@ -80,10 +82,10 @@
   .chatframe {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     z-index: 5000;
-    max-height: calc(100vh - 60px);
-    height: 660px;
+    max-height: calc(100vh - 20px);
+    height: min(100vh - 100px, 660px);
     width: 500px;
     position: fixed;
     padding-bottom: 10px;
@@ -94,10 +96,10 @@
     -moz-box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 20px -14px rgba(0, 0, 0, 0.75);
 
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 1);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
+    /* -webkit-backdrop-filter: blur(10px); */
     border-radius: 20px;
     /* border: 1px solid rgba(255, 255, 255, 0.18); */
   }

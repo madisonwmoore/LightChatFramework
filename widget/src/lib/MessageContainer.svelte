@@ -55,10 +55,13 @@
   messageStore.subscribe((val) => {
     messageList = val;
   });
-  let shouldScroll = false;
+  let shouldScroll: boolean = false;
+
   const handleScroll = () => {
     shouldScroll = true;
-    // setTimeout(()=>{shouldScroll=false},1000)
+    // setTimeout(() => {
+    //   shouldScroll = false;
+    // }, 1000);
   };
 </script>
 
@@ -106,14 +109,22 @@
 
 <style>
   .container {
-    overflow: auto;
+    /* scrollbar-gutter: stable; */
+    /* position: relative; */
+    overflow-y: scroll;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    /* overflow-y: scroll; */
     height: 100%;
+ 
+   
     width: 100%;
+    padding-left: (100vw - 100%);
     display: flex;
     flex-direction: column;
   }
+
+
 
   .scrollBarDisabled {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -121,19 +132,23 @@
     overflow-y: scroll;
   }
   .scrollBarDisabled::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
+    overflow-y: auto;
+    /* scrollbar-width: thin; */
   }
 
   .flexBox {
     flex-grow: 1;
   }
 
-  ::-webkit-scrollbar {
+  .container::-webkit-scrollbar {
     width: 8px;
+    scrollbar-gutter: stable;
   }
 
   ::-webkit-scrollbar-track {
     background-color: transparent;
+    scrollbar-gutter: stable;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -151,13 +166,13 @@
     padding-top: 10px;
     max-width: 100%;
     flex-direction: column;
+    /* overflow-y: scroll; */
     justify-content: end;
     padding-bottom: 50px;
     flex-grow: 1;
     background-color: transparent;
   }
-  .message{
+  .message {
     max-width: 100%;
-   
   }
 </style>

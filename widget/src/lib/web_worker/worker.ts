@@ -1,5 +1,9 @@
 import FakeConnector from "../Connector/FakeConnector";
-import { BubblePickerMessage, Message, TextMessage } from "../Stores/MessageStore";
+import {
+  BubblePickerMessage,
+  Message,
+  TextMessage,
+} from "../Stores/MessageStore";
 import { v4 as uuidv4 } from "uuid";
 
 self.connections = [];
@@ -22,110 +26,110 @@ onconnect = (e) => {
   port.addEventListener("message", (e) => {
     console.log(e);
 
-    
-    
-   
-
-
     const workerResult = `Result: ${e.data[0] * e.data[1]}`;
     self.connections.forEach((port: MessagePort) => {
-      const response:TextMessage={
+      const response: TextMessage = {
         id: uuidv4(),
         datetime: 0,
         type: "TEXT",
-        variant:'outgoing',
+        variant: "outgoing",
         content: {
           message: e.data.payload,
-          contentType: "text"
-        }
-      }
+          contentType: "text",
+        },
+      };
       port.postMessage(response);
     });
-    let response:TextMessage
-    if(e.data.payload.includes('list')){
-      console.log("List")
-       response={
-        sender:'Bot',
+    let response: TextMessage;
+    if (e.data.payload.includes("list")) {
+      console.log("List");
+      response = {
+        sender: "Bot",
         id: uuidv4(),
         datetime: 0,
         type: "TEXT",
-        variant:'incoming',
-        
+        variant: "incoming",
+
         content: {
           message: "Here is a list",
-          buttons:["Button 1", "Button 2"],
-          contentType: "text"
-        }
-      }
-    }
-    else if(e.data.payload.includes('potato')){
-      console.log("List")
-       response={
-        sender:'Bot',
+          buttons: [
+            "Button 1",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+            "Button 2",
+          ],
+          contentType: "text",
+        },
+      };
+    } else if (e.data.payload.includes("potato")) {
+      console.log("List");
+      response = {
+        sender: "Bot",
         id: uuidv4(),
         datetime: 0,
         type: "TEXT",
-        variant:'incoming',
-        
+        variant: "incoming",
+
         content: {
           message: `<span><h1 style="color:red;">Facts</h1></span><div><ul><li>This is a fact</li></ul></div>`,
-
-          buttons:["Button 1", "Button 2", "Button 3"],
-          contentType: "html"
-        }
-      }
-    }
-    else if(e.data.payload.includes('file')){
-      response={
-       id: uuidv4(),
-       datetime: 0,
-       type: "FILE",
-       variant:'incoming',
-       content: {
-         message: "Here is a list",
-         buttons:["Button 1", "Button 2"],
-         contentType: "text"
-       }
-     }
-   }
-    else if(e.data.payload.includes('fact')){
-      response={
-        sender:'Bot',
+          buttons: ["Button 1", "Button 2", "Button 3"],
+          contentType: "html",
+        },
+      };
+    } else if (e.data.payload.includes("file")) {
+      response = {
+        id: uuidv4(),
+        datetime: 0,
+        type: "FILE",
+        variant: "incoming",
+        content: {
+          message: "Here is a list",
+          buttons: ["Button 1", "Button 2"],
+          contentType: "text",
+        },
+      };
+    } else if (e.data.payload.includes("fact")) {
+      response = {
+        sender: "Bot",
         id: uuidv4(),
         datetime: 0,
         type: "TEXT",
-        variant:'incoming',
-        
+        variant: "incoming",
+
         content: {
           message: `A: Hail is caused when raindrops are lifted up into the atmosphere during a thunderstorm and then supercooled by temperatures below freezing, turning them into ice balls, says Dr. Dick Orville of Texas A&M University. "The faster the updraft on these balls of ice, the bigger they can grow," he adds.",`,
 
-          contentType: "text"
-        }
-      }
-    }
-    else{
-        response={
-          sender:'Bot',
-          id: uuidv4(),
-          datetime: 0,
-          type: "HTML",
-          variant:'incoming',
-          content: {
-            message: "You Said: " +`<i>${e.data.payload}</i>` as string,
-            contentType: "html"
-          }
-        }
+          contentType: "text",
+        },
+      };
+    } else {
+      response = {
+        sender: "Bot",
+        id: uuidv4(),
+        datetime: 0,
+        type: "HTML",
+        variant: "incoming",
+        content: {
+          message: ("You Said: " + `<i>${e.data.payload}</i>`) as string,
+          contentType: "html",
+        },
+      };
     }
 
-
-    setTimeout(()=>{
+    setTimeout(() => {
       self.connections.forEach((port: MessagePort) => {
-       response
+        response;
         port.postMessage(response);
       });
-    },1000)
+    }, 1000);
 
-    let content=`<svg height="100px" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+    let content = `<svg height="100px" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
     <style>
       .small {
         font: italic 13px sans-serif;
@@ -160,8 +164,6 @@ onconnect = (e) => {
     //     port.postMessage(response);
     //   });
     // },2000)
-
-  
   });
 
   port.start();

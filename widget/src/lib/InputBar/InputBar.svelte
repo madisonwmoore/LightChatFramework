@@ -53,9 +53,9 @@
 <style>
   .inputBar {
     line-height: 2rem;
-    background-color: white;
     min-height: 40px;
     height: auto;
+    margin-top:2px;
   }
 
   .wrapper {
