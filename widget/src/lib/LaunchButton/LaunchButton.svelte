@@ -16,6 +16,7 @@
     position: fixed;
     right: 10px;
     bottom: 10px;
+    z-index: 6000;
     padding: 0;
     display: flex;
     border: none;

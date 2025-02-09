@@ -16,6 +16,7 @@
   import { quintOut } from "svelte/easing";
 
   let scrollContainer: HTMLDivElement;
+  const isLoading=false;
 
   export const [send, receive] = crossfade({
     duration: (d) => Math.sqrt(d * 200),
@@ -101,16 +102,17 @@
           <FileMessage variant={val.variant} message={val.content} />
         {/if}
         {#if val.type === "CUSTOM"}
-          <HTMLMessage variant="incoming" content={val.content} />
+          <custom-element></custom-element>
         {/if}
       </div>
     {/each}
   </div>
-
+{#if isLoading}
   <div class="loading-container">
     <!-- <SyncLoader size="20" color="#a6a6a6"  unit="px" duration="1s"/> -->
     <Ellipsis size="30px" />
   </div>
+  {/if}
 </div>
 
 <style>

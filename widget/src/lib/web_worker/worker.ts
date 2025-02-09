@@ -108,7 +108,23 @@ onconnect = (e) => {
           contentType: "text",
         },
       };
-    } else {
+    } 
+    else if (e.data.payload.includes("custom")) {
+      response = {
+        sender: "Bot",
+        id: uuidv4(),
+        datetime: 0,
+        type: "CUSTOM",
+        variant: "incoming",
+
+        content: {
+          message: `A: Hail is caused when raindrops are lifted up into the atmosphere during a thunderstorm and then supercooled by temperatures below freezing, turning them into ice balls, says Dr. Dick Orville of Texas A&M University. "The faster the updraft on these balls of ice, the bigger they can grow," he adds.",`,
+
+          contentType: "text",
+        },
+      };
+    }
+    else {
       response = {
         sender: "Bot",
         id: uuidv4(),
