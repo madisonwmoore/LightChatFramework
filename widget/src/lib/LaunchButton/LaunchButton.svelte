@@ -1,10 +1,14 @@
 <script>
   import { IconMessage } from "@tabler/icons-svelte";
   import { MessageCircleMore } from "lucide-svelte";
+  import {unreadMessages} from "../State/State.svelte"
 </script>
 
 <button aria-label="Chat" on:click class="launchButton">
-  <div class="unread">3</div>
+{#if unreadMessages.unreadMessages}
+  <div class="unread">{unreadMessages.unreadMessages}</div>
+{/if}
+
   <MessageCircleMore color="white" size={30} />
 </button>
 

@@ -9,17 +9,17 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@types/uuid": "^9.0.8",
-    "svelte": "^4.2.12",
+    "svelte": "^5.19.9",
     "svelte-loading-spinners": "^0.3.6",
     "typescript": "^5.4.4",
     "uuid": "^9.0.1",
-    "vite": "^5.1.6"
+    "vite": "^6.1.0"
   },
   "dependencies": {
     "@sveltejs/svelte-virtual-list": "^3.0.1",
-    "@tabler/icons-svelte": "^3.1.0",
+    "@tabler/icons-svelte": "^3.30.0",
     "lucide-svelte": "^0.381.0",
     "svelte-autosize": "^1.1.0",
     "svelte-loading-animation": "^0.0.1"

@@ -12,10 +12,7 @@
   import Connector from "./Connector/Connector";
   import { connector } from "./Stores/ConnectionStore";
   import { onMount } from "svelte";
-  import ErrorState from "./ErrorState.svelte";
-  import { postMessage, type Message } from "./Stores/MessageStore";
-  import { appStateStore } from "./Stores/AppState";
-  import { IconTruckDelivery } from "@tabler/icons-svelte";
+  import {unreadMessages} from "./State/State.svelte.js"
 
   let onDrag:boolean;
 
@@ -27,8 +24,11 @@
   });
 
   function widgetOpened(node) {
+    unreadMessages.unreadMessages=0;
     return {
-      destroy: () => {},
+      destroy: () => {
+     
+      },
     };
   }
   function handledragenter(e){

@@ -1,11 +1,7 @@
 <script>
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
-
   import ChatFrame from './lib/ChatFrame.svelte'
-
- 
-
 </script>
 
 <main>
@@ -22,7 +18,6 @@
   <div class="card">
   </div>
 <chat-widget/>
-
 
   <p>
     Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
