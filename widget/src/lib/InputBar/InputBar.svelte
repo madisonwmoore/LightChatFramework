@@ -46,7 +46,7 @@
       bind:this={textarea}
       class="inputText"
       placeholder="Send a Message"
-    />
+    ></textarea>
     <button disabled={value>0} on:click={() => sendMessage()} class="sendButton"> <SendHorizontal color="gray"/> </button>
   </div>
 
@@ -77,7 +77,6 @@
     margin-left: 15px;
     margin-right: 20px;
     border: none;
-    resize: none;
     flex-grow: 1;
     resize: none;
     color:rgb(31, 31, 31);

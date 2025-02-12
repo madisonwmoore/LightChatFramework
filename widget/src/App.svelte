@@ -2,6 +2,8 @@
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import ChatFrame from './lib/ChatFrame.svelte'
+  import {Typewriter} from "./lib/CustomElement"
+  customElements.define('poop-element',Typewriter)
 </script>
 
 <main>
@@ -18,7 +20,7 @@
   <div class="card">
   </div>
 <chat-widget/>
-
+<poop-element/>
   <p>
     Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
   </p>
