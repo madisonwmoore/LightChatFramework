@@ -4,9 +4,9 @@
   import { slide } from "svelte/transition";
   import { X, Bot } from "lucide-svelte";
 
-  messageStore.subscribe((m) => {
-    console.log("Moo");
-  });
+  // messageStore.subscribe((m) => {
+  //   console.log("Moo");
+  // });
   let isVideo = false;
   let isSender = true;
   let stream;
