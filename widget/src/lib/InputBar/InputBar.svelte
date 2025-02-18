@@ -39,6 +39,7 @@
   <div class="wrapper">
     <textarea
       aria-label="Message Input"
+      style="resize:none;"
       on:keydown={handleKeyDown}
       bind:value
       rows="1"
@@ -54,10 +55,13 @@
 
 <style>
   .inputBar {
+    display: flex;
+    flex-direction: column;
     line-height: 2rem;
     min-height: 40px;
     height: auto;
     margin-top:2px;
+    flex-shrink: 0;
   }
 
   .wrapper {

@@ -1,3 +1,13 @@
-.message{
+/* .message{
     background-color: pink;
+} */
+
+.ascii-art {
+    font-family: monospace;
+    white-space: pre;
+    background-color: #f3f4f6;
+    padding: 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    display: inline-block;
 }

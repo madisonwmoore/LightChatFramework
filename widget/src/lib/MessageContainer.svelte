@@ -119,18 +119,18 @@
   .container {
     /* scrollbar-gutter: stable; */
     /* position: relative; */
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     scroll-behavior: smooth;
     /* overflow-y: scroll; */
     height: 100%;
- 
-   
+    flex-shrink: 1;
     width: 100%;
     padding-left: (100vw - 100%);
     display: flex;
     flex-direction: column;
-    scrollbar-width: thin;
+    scrollbar-width:auto;
+    scrollbar-color: blue;
   }
 
 

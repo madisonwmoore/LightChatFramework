@@ -3,6 +3,10 @@
   import { messageStore } from "./Stores/MessageStore";
   import { slide } from "svelte/transition";
   import { X, Bot } from "lucide-svelte";
+  import { Spring } from 'svelte/motion';
+  const spring = new Spring(0,{
+    damping:0.16, stiffness:0.10,
+  });
 
   // messageStore.subscribe((m) => {
   //   console.log("Moo");
@@ -50,10 +54,10 @@
 <div class="header">
   <div class="content">
     <!-- <slot></slot> -->
-    <!-- <button on:click={() => startStream()}>Start</button> -->
+
 
     {#if isSender}
-      <div class="sender_container">
+      <div style="bottom:{spring.current}px" class="sender_container">
         <div class="agent_avatar"><Bot width={28} height={28} color="white"/></div>
         <div class="sender_name">
           <b>Agent Name</b>
@@ -61,6 +65,9 @@
         </div>
       </div>
     {/if}
+
+    <button on:click={() => {spring.target=14;}}>Start</button>
+
     <div class="buttons">
       <button><X color="white" /></button>
     </div>
@@ -91,6 +98,7 @@
     border-radius: 0px;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    flex-shrink: 0;
     
   }
 
@@ -145,6 +153,8 @@
     flex-direction: row;
     margin: 0px 40px;
     padding-bottom: 8px;
+    position: relative;
+    bottom:0px;
   }
 
   .sender_name {

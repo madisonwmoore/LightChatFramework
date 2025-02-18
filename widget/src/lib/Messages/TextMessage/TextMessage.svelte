@@ -112,8 +112,10 @@
     clear: both;
     display: block;
     text-align: left;
-    /* word-break: break-all; */
-    /* max-width: 80%; */
+     /* word-break: break-all; */
+     word-break: keep-all; 
+     word-wrap: break-word;
+    max-width: 100%; 
     float: right;
     background-color: #00529b;
     padding: 5px 10px;
